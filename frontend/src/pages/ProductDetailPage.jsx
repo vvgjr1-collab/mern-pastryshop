@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { Link, useParams } from "react-router";
+import { Link, useParams, useSearchParams } from "react-router";
 import {
   ArrowLeftIcon,
   LoaderIcon,
@@ -19,11 +19,15 @@ import api from "../lib/axios";
 import { formatINR } from "../lib/utils";
 import { addToCart } from "../lib/cart";
 import { CHAINS } from "../lib/trade";
+import demoProducts from "../lib/demoProducts";
+import { getTrack } from "../lib/account";
 
 const Row = ({ label, value }) =>
   value ? (
     <div className="flex flex-col sm:flex-row sm:gap-4 py-2 border-b border-base-content/10 last:border-0">
-      <span className="text-sm text-base-content/50 w-44 shrink-0">{label}</span>
+      <span className="text-sm text-base-content/50 w-44 shrink-0">
+        {label}
+      </span>
       <span className="text-sm text-base-content/90">{value}</span>
     </div>
   ) : null;
@@ -33,11 +37,24 @@ const ProductDetailPage = () => {
   const [track, setTrack] = useState("retail");
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [searchParams] = useSearchParams();
 
   const { id } = useParams();
+  const demoMode = searchParams.get("demo") === "true";
 
   useEffect(() => {
     const fetchProduct = async () => {
+      if (demoMode) {
+        const demoProduct = demoProducts.find((item) => item._id === id);
+        setProduct(demoProduct || null);
+        setTrack(getTrack());
+        setQuantity(
+          getTrack() === "wholesale" ? demoProduct?.wholesale?.moqCases || 1 : 1
+        );
+        setLoading(false);
+        return;
+      }
+
       try {
         const res = await api.get(`/products/${id}`);
         setProduct(res.data.product);
@@ -49,14 +66,25 @@ const ProductDetailPage = () => {
         );
       } catch (error) {
         console.log("Error in fetching product", error);
-        toast.error("Failed to fetch the product");
+        const demoProduct = demoProducts.find((item) => item._id === id);
+        if (demoProduct) {
+          setProduct(demoProduct);
+          setTrack(getTrack());
+          setQuantity(
+            getTrack() === "wholesale"
+              ? demoProduct.wholesale?.moqCases || 1
+              : 1
+          );
+        } else {
+          toast.error("Failed to fetch the product");
+        }
       } finally {
         setLoading(false);
       }
     };
 
     fetchProduct();
-  }, [id]);
+  }, [demoMode, id]);
 
   if (loading) {
     return (
@@ -72,7 +100,10 @@ const ProductDetailPage = () => {
         <Navbar />
         <div className="max-w-2xl mx-auto p-8 text-center">
           <h2 className="text-2xl font-bold">Product not found</h2>
-          <Link to="/catalogue" className="btn btn-primary mt-4">
+          <Link
+            to={demoMode ? "/catalogue?demo=true" : "/catalogue"}
+            className="btn btn-primary mt-4"
+          >
             Back to the catalogue
           </Link>
         </div>
@@ -100,7 +131,9 @@ const ProductDetailPage = () => {
 
   const handleAdd = () => {
     if (quantity < minQty) {
-      toast.error(`Minimum order is ${minQty} ${isWholesale ? "case(s)" : "pack(s)"}`);
+      toast.error(
+        `Minimum order is ${minQty} ${isWholesale ? "case(s)" : "pack(s)"}`
+      );
       return;
     }
 
@@ -129,7 +162,10 @@ const ProductDetailPage = () => {
 
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
-          <Link to="/catalogue" className="btn btn-ghost mb-6">
+          <Link
+            to={demoMode ? "/catalogue?demo=true" : "/catalogue"}
+            className="btn btn-ghost mb-6"
+          >
             <ArrowLeftIcon className="size-5" />
             Back to the catalogue
           </Link>
@@ -158,7 +194,9 @@ const ProductDetailPage = () => {
                   <p className="text-3xl font-bold text-primary mt-3">
                     {formatINR(unitPrice)}
                   </p>
-                  <p className="text-sm text-base-content/60">per {packLabel}</p>
+                  <p className="text-sm text-base-content/60">
+                    per {packLabel}
+                  </p>
                   {isWholesale && (
                     <p className="text-xs text-base-content/50 mt-1">
                       {formatINR(product.wholesale.pricePerKg)}/kg · MOQ{" "}
@@ -248,7 +286,10 @@ const ProductDetailPage = () => {
                 label="Where on the animal"
                 value={product.cutGuide?.whereOnAnimal}
               />
-              <Row label="How to cook it" value={product.cutGuide?.cookMethod} />
+              <Row
+                label="How to cook it"
+                value={product.cutGuide?.cookMethod}
+              />
               <Row label="Temperature" value={product.cutGuide?.cookTemp} />
               <Row label="Timing" value={product.cutGuide?.cookTime} />
               <Row label="Chef's note" value={product.cutGuide?.chefNote} />
@@ -291,7 +332,10 @@ const ProductDetailPage = () => {
                 <Row label="Feed" value={product.provenance?.feed} />
                 <Row label="Origin" value={product.provenance?.origin} />
                 <Row label="Grade" value={product.provenance?.grade} />
-                <Row label="Catch method" value={product.provenance?.catchMethod} />
+                <Row
+                  label="Catch method"
+                  value={product.provenance?.catchMethod}
+                />
                 <Row
                   label="Landing region"
                   value={product.provenance?.landingRegion}
@@ -320,7 +364,9 @@ const ProductDetailPage = () => {
                 <Row
                   label="Cut thickness"
                   value={
-                    product.spec?.thicknessMm ? `${product.spec.thicknessMm} mm` : ""
+                    product.spec?.thicknessMm
+                      ? `${product.spec.thicknessMm} mm`
+                      : ""
                   }
                 />
                 <Row

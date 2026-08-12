@@ -2,9 +2,12 @@ import axios from "axios";
 import { getAccountKey, getTrack } from "./account";
 // we will create an axios instance
 
-// in production, there's no localhost so we have to make this dynamic
+// Use an explicit override when present; otherwise match the backend dev port.
 const BASE_URL =
-  import.meta.env.MODE === "development" ? "http://localhost:5001/api" : "/api";
+  import.meta.env.VITE_API_BASE_URL ||
+  (import.meta.env.MODE === "development"
+    ? "http://localhost:5001/api"
+    : "/api");
 
 // const axiosInstance or const api same thing
 const api = axios.create({

@@ -101,6 +101,7 @@ const CheckoutPage = () => {
         userId,
         items: cart.lines.map((line) => ({
           productId: line.productId,
+          sku: line.sku,
           quantity: line.quantity,
         })),
         customer: {

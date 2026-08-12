@@ -5,7 +5,7 @@ import { formatINR } from "../lib/utils";
 import { addToCart } from "../lib/cart";
 import ChainBadge from "./ChainBadge";
 
-const ProductCard = ({ product, track }) => {
+const ProductCard = ({ product, track, demoMode = false }) => {
   const isWholesale = track === "wholesale" && product.wholesale;
   const isPreOrder =
     product.seasonal?.isSeasonal && product.seasonal?.preOrderOpen;
@@ -49,7 +49,11 @@ const ProductCard = ({ product, track }) => {
 
   return (
     <Link
-      to={`/product/${product._id}`}
+      to={
+        demoMode
+          ? `/product/${product._id}?demo=true`
+          : `/product/${product._id}`
+      }
       className="card bg-base-100 hover:shadow-lg transition-all duration-200
       border-t-4 border-solid border-primary"
     >
@@ -72,7 +76,8 @@ const ProductCard = ({ product, track }) => {
           {product.provenance?.farm || product.provenance?.origin}
           {product.provenance?.breed && ` · ${product.provenance.breed}`}
           {product.provenance?.grade && ` · ${product.provenance.grade}`}
-          {product.provenance?.catchMethod && ` · ${product.provenance.catchMethod}`}
+          {product.provenance?.catchMethod &&
+            ` · ${product.provenance.catchMethod}`}
         </p>
 
         {/* cut literacy, in one line, before they even open the page */}
@@ -83,7 +88,8 @@ const ProductCard = ({ product, track }) => {
         <div className="flex flex-wrap gap-1 mt-2">
           {product.spec?.portionWeightG && (
             <span className="badge badge-ghost badge-sm">
-              {product.spec.portionWeightG} g ±{product.spec.weightTolerancePct}%
+              {product.spec.portionWeightG} g ±{product.spec.weightTolerancePct}
+              %
             </span>
           )}
           {product.spec?.thicknessMm && (
@@ -121,7 +127,9 @@ const ProductCard = ({ product, track }) => {
             ) : (
               <p className="text-xs text-base-content/50">
                 {formatINR(
-                  Math.round((product.retail.price / product.retail.packSizeG) * 1000)
+                  Math.round(
+                    (product.retail.price / product.retail.packSizeG) * 1000
+                  )
                 )}
                 /kg
               </p>

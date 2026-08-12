@@ -1,5 +1,6 @@
 import Order from "../models/Order.js";
 import Product from "../models/Product.js";
+import mongoose from "mongoose";
 import { RETAIL, WHOLESALE } from "../config/trade.js";
 
 // SOP-20260812-4F2A
@@ -81,11 +82,22 @@ export async function createOrder(req, res) {
         return res.status(400).json({ message: "Invalid line item" });
       }
 
-      const product = await Product.findById(item.productId);
+      let product = null;
+
+      if (mongoose.Types.ObjectId.isValid(item.productId)) {
+        product = await Product.findById(item.productId);
+      }
+
+      if (!product && item.sku) {
+        product = await Product.findOne({ sku: String(item.sku).trim().toUpperCase() });
+      }
+
       if (!product || !product.isActive) {
         return res
           .status(404)
-          .json({ message: `Product no longer available: ${item.productId}` });
+          .json({
+            message: `Product no longer available: ${item.sku || item.productId}`,
+          });
       }
 
       const isPreOrder =

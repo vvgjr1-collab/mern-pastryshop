@@ -13,9 +13,11 @@ import api from "../lib/axios";
 import { CATEGORIES, CHAINS, RETAIL, WHOLESALE } from "../lib/trade";
 import { getTrack } from "../lib/account";
 import { formatINR } from "../lib/utils";
+import { filterDemoProducts } from "../lib/demoProducts";
 
 const CataloguePage = () => {
   const [isRateLimited, setIsRateLimited] = useState(false);
+  const [isDemoCatalogue, setIsDemoCatalogue] = useState(false);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [track, setTrack] = useState(getTrack());
@@ -25,10 +27,28 @@ const CataloguePage = () => {
   const chain = searchParams.get("chain") || "all";
   const search = searchParams.get("search") || "";
   const seasonal = searchParams.get("seasonal") === "true";
+  const demoMode = searchParams.get("demo") === "true";
 
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
+
+      if (demoMode) {
+        setProducts(
+          filterDemoProducts({
+            category,
+            chain,
+            search,
+            seasonal,
+          })
+        );
+        setTrack(getTrack());
+        setIsRateLimited(false);
+        setIsDemoCatalogue(true);
+        setLoading(false);
+        return;
+      }
+
       try {
         const res = await api.get("/products", {
           params: { category, chain, search, seasonal: seasonal || undefined },
@@ -37,14 +57,26 @@ const CataloguePage = () => {
         setTrack(res.data.track);
         setProducts(res.data.products);
         setIsRateLimited(false);
+        setIsDemoCatalogue(false);
       } catch (error) {
         console.log("Error fetching products");
         console.log(error);
         if (error.response?.status === 429) {
           //429 means rate limited
           setIsRateLimited(true);
+          setIsDemoCatalogue(false);
         } else {
-          toast.error("Failed to load the catalogue");
+          setProducts(
+            filterDemoProducts({
+              category,
+              chain,
+              search,
+              seasonal,
+            })
+          );
+          setTrack(getTrack());
+          setIsDemoCatalogue(true);
+          toast.info("Showing the demo catalogue while the API is unavailable");
         }
       } finally {
         setLoading(false);
@@ -58,6 +90,13 @@ const CataloguePage = () => {
     const next = new URLSearchParams(searchParams);
     if (!value || value === "all" || value === "false") next.delete(key);
     else next.set(key, value);
+    setSearchParams(next);
+  };
+
+  const setDemoMode = (enabled) => {
+    const next = new URLSearchParams(searchParams);
+    if (enabled) next.set("demo", "true");
+    else next.delete("demo");
     setSearchParams(next);
   };
 
@@ -80,7 +119,11 @@ const CataloguePage = () => {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
             <div>
               <h1 className="text-2xl font-bold">
-                {isWholesale ? "Wholesale rate card" : "Catalogue"}
+                {isWholesale
+                  ? "Wholesale rate card"
+                  : isDemoCatalogue
+                  ? "Demo catalogue"
+                  : "Catalogue"}
               </h1>
               <p className="text-sm text-base-content/70">
                 {isWholesale
@@ -94,13 +137,42 @@ const CataloguePage = () => {
                     )}`}
               </p>
             </div>
-            {!isWholesale && (
-              <Link to="/wholesale" className="btn btn-outline btn-sm">
-                Buying for a kitchen? Open a trade account
-              </Link>
-            )}
+            <div className="flex flex-wrap gap-2">
+              {!isWholesale && (
+                <Link to="/wholesale" className="btn btn-outline btn-sm">
+                  Buying for a kitchen? Open a trade account
+                </Link>
+              )}
+              {demoMode ? (
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+                  onClick={() => setDemoMode(false)}
+                >
+                  Back to live catalogue
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+                  onClick={() => setDemoMode(true)}
+                >
+                  Open demo catalogue
+                </button>
+              )}
+            </div>
           </div>
         </div>
+
+        {isDemoCatalogue && (
+          <div className="alert alert-info mb-6">
+            <span>
+              You are viewing the demo catalogue. It uses local sample SKUs,
+              keeps the filters working, and opens sample product pages without
+              needing the API.
+            </span>
+          </div>
+        )}
 
         {/* filters */}
         <div className="flex flex-col lg:flex-row gap-3 mb-6">
@@ -172,7 +244,12 @@ const CataloguePage = () => {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {products.map((product) => (
-                <ProductCard key={product._id} product={product} track={track} />
+                <ProductCard
+                  key={product._id}
+                  product={product}
+                  track={track}
+                  demoMode={isDemoCatalogue}
+                />
               ))}
             </div>
           </>
