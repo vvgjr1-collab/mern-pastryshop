@@ -1,0 +1,48 @@
+<svg
+  width="512"
+  height="512"
+  viewBox="0 0 512 512"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Paper body -->
+  <rect
+    x="128"
+    y="96"
+    width="256"
+    height="320"
+    rx="24"
+    fill="#FFE1A8"
+    stroke="#1F2937"
+    stroke-width="10"
+  />
+
+  <!-- Folded corner -->
+  <path
+    d="M320 96 V160 H384 Z"
+    fill="#FFD58A"
+    stroke="#1F2937"
+    stroke-width="10"
+    stroke-linejoin="round"
+  />
+
+  <!-- Top binding bar -->
+  <rect
+    x="128"
+    y="96"
+    width="256"
+    height="56"
+    rx="24"
+    fill="#FBC97A"
+  />
+
+  <!-- Rings -->
+  <rect x="176" y="64" width="24" height="56" rx="12" fill="#EF6F6C" />
+  <rect x="244" y="64" width="24" height="56" rx="12" fill="#EF6F6C" />
+  <rect x="312" y="64" width="24" height="56" rx="12" fill="#EF6F6C" />
+
+  <!-- Paper lines -->
+  <line x1="168" y1="200" x2="344" y2="200" stroke="#1F2937" stroke-width="8" stroke-linecap="round"/>
+  <line x1="168" y1="244" x2="344" y2="244" stroke="#1F2937" stroke-width="8" stroke-linecap="round"/>
+  <line x1="168" y1="288" x2="344" y2="288" stroke="#1F2937" stroke-width="8" stroke-linecap="round"/>
+  <line x1="168" y1="332" x2="280" y2="332" stroke="#1F2937" stroke-width="8" stroke-linecap="round"/>
+</svg>
