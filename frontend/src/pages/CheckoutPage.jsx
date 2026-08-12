@@ -128,7 +128,9 @@ const CheckoutPage = () => {
           duration: 4000,
         });
       } else {
-        toast.error(error.response?.data?.message || "Failed to place the order");
+        toast.error(
+          error.response?.data?.message || "Failed to place the order"
+        );
       }
     } finally {
       setLoading(false);
@@ -252,7 +254,9 @@ const CheckoutPage = () => {
                     <div className="form-control sm:col-span-2">
                       <label className="label">
                         <span className="label-text">
-                          {isWholesale ? "Delivery window *" : "Delivery slot *"}
+                          {isWholesale
+                            ? "Delivery window *"
+                            : "Delivery slot *"}
                         </span>
                       </label>
                       <select
@@ -310,7 +314,9 @@ const CheckoutPage = () => {
 
                     <div className="form-control sm:col-span-2">
                       <label className="label">
-                        <span className="label-text">Notes for the cold room</span>
+                        <span className="label-text">
+                          Notes for the cold room
+                        </span>
                       </label>
                       <textarea
                         className="textarea textarea-bordered h-20"

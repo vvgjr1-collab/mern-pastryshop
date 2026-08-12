@@ -89,15 +89,15 @@ export async function createOrder(req, res) {
       }
 
       if (!product && item.sku) {
-        product = await Product.findOne({ sku: String(item.sku).trim().toUpperCase() });
+        product = await Product.findOne({
+          sku: String(item.sku).trim().toUpperCase(),
+        });
       }
 
       if (!product || !product.isActive) {
-        return res
-          .status(404)
-          .json({
-            message: `Product no longer available: ${item.sku || item.productId}`,
-          });
+        return res.status(404).json({
+          message: `Product no longer available: ${item.sku || item.productId}`,
+        });
       }
 
       const isPreOrder =
@@ -120,7 +120,12 @@ export async function createOrder(req, res) {
         }
         unitPrice = product.wholesale.pricePerKg * product.wholesale.caseSizeKg;
         packLabel = `${product.wholesale.caseSizeKg} kg case`;
-        stockUpdates.push({ product, field: "wholesale.stockCases", quantity, isPreOrder });
+        stockUpdates.push({
+          product,
+          field: "wholesale.stockCases",
+          quantity,
+          isPreOrder,
+        });
       } else {
         if (!isPreOrder && quantity > product.retail.stockPacks) {
           return res.status(400).json({
@@ -129,7 +134,12 @@ export async function createOrder(req, res) {
         }
         unitPrice = product.retail.price;
         packLabel = `${product.retail.packSizeG} g pack`;
-        stockUpdates.push({ product, field: "retail.stockPacks", quantity, isPreOrder });
+        stockUpdates.push({
+          product,
+          field: "retail.stockPacks",
+          quantity,
+          isPreOrder,
+        });
       }
 
       orderItems.push({
@@ -159,7 +169,9 @@ export async function createOrder(req, res) {
     }
 
     const deliveryFee =
-      isWholesale || subtotal >= RETAIL.freeDeliveryOver ? 0 : RETAIL.deliveryFee;
+      isWholesale || subtotal >= RETAIL.freeDeliveryOver
+        ? 0
+        : RETAIL.deliveryFee;
 
     const order = new Order({
       orderNumber: makeOrderNumber(),
@@ -232,7 +244,8 @@ export async function cancelOrder(req, res) {
 
     if (["dispatched", "delivered"].includes(order.status)) {
       return res.status(400).json({
-        message: "This order has already left the cold room — call your account contact",
+        message:
+          "This order has already left the cold room — call your account contact",
       });
     }
     if (order.status === "cancelled") {
@@ -246,7 +259,9 @@ export async function cancelOrder(req, res) {
     for (const line of order.items) {
       if (line.isPreOrder) continue;
       const field =
-        order.track === "wholesale" ? "wholesale.stockCases" : "retail.stockPacks";
+        order.track === "wholesale"
+          ? "wholesale.stockCases"
+          : "retail.stockPacks";
       await Product.findByIdAndUpdate(line.product, {
         $inc: { [field]: line.quantity },
       });

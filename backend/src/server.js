@@ -1,7 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 
 import productsRoutes from "./routes/productsRoutes.js";
 import ordersRoutes from "./routes/ordersRoutes.js";
@@ -14,7 +16,9 @@ dotenv.config();
 
 const app = express(); //expressFunc().("/route",(request,response) => {})
 const PORT = process.env.PORT || 5001;
-const __dirname = path.resolve(); // if u console log this it will give path to backend
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const frontendDistPath = path.resolve(__dirname, "../../frontend/dist");
 
 //middleware: this will parse the JSON bodies from postman/database
 
@@ -44,11 +48,11 @@ app.use("/api/products", productsRoutes); //catalogue: same SKUs, two tracks
 app.use("/api/orders", ordersRoutes); //ordering: retail carts and wholesale drops
 app.use("/api/accounts", accountsRoutes); //wholesale account applications
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+if (fs.existsSync(frontendDistPath)) {
+  app.use(express.static(frontendDistPath));
 
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+    res.sendFile(path.join(frontendDistPath, "index.html"));
   });
 }
 
