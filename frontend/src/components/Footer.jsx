@@ -3,77 +3,92 @@ import { Link } from "react-router";
 
 // The shared spine — both audiences see the same sourcing, cold chain,
 // compliance and cut-guide material.
+const columns = [
+  {
+    head: "Shop",
+    items: [
+      { label: "Catalogue", to: "/catalogue" },
+      { label: "Pork", to: "/catalogue?category=pork" },
+      { label: "Charcuterie", to: "/catalogue?category=cold-cuts" },
+      { label: "Steak", to: "/catalogue?category=steak" },
+      { label: "Seafood", to: "/catalogue?category=seafood" },
+    ],
+  },
+  {
+    head: "Trade",
+    items: [
+      { label: "Wholesale", to: "/wholesale" },
+      { label: "Rate card", to: "/wholesale" },
+      { label: "Case sizes", to: "/wholesale" },
+      { label: "Spec sheets", to: "/wholesale" },
+      { label: "Credit terms", to: "/wholesale" },
+    ],
+  },
+  {
+    head: "Learn",
+    items: [
+      { label: "Cut guide", to: "/cut-guide" },
+      { label: "Canada story", to: "/canada-story" },
+      { label: "Cold chain", to: "/cold-chain" },
+      { label: "Sourcing & farms", to: "/#sourcing" },
+    ],
+  },
+  {
+    head: "Care",
+    items: [
+      { label: "Your orders", to: "/orders" },
+      { label: "Delivery areas", to: "/#contact" },
+      { label: "Quality & compliance", to: "/#compliance" },
+      { label: "Contact", to: "/#contact" },
+    ],
+  },
+];
+
 const Footer = () => {
   return (
-    <footer className="border-t border-base-content/10 bg-base-300 mt-16">
-      <div className="max-w-6xl mx-auto px-4 py-10 grid gap-8 md:grid-cols-4">
-        <div>
-          <h3 className="text-xl font-bold text-primary">Slice of Pink</h3>
-          <p className="text-sm text-base-content/60 mt-2">
-            A meat wholesaler that sells the paperwork with the product: farm,
-            breed, chain, spec.
-          </p>
-        </div>
+    <footer className="border-t border-sop-bone-300 bg-sop-bone-100 px-4 pb-24 pt-[26px] lg:grid lg:grid-cols-[1.4fr_repeat(4,1fr)] lg:gap-8 lg:px-8 lg:pb-10 lg:pt-12">
+      <div>
+        <span className="mb-4 block font-display text-2xl leading-none text-sop-ink lg:mb-3 lg:text-[34px]">
+          Slice of Pink
+        </span>
+        <span className="hidden max-w-[26ch] font-plex text-xs leading-[1.7] text-sop-ink-50 lg:block">
+          FSSAI 10021064000000
+          <br />
+          GSTIN 29ABCDE1234F1Z5
+          <br />
+          Contains non-vegetarian products.
+        </span>
+      </div>
 
-        <div>
-          <h4 className="font-semibold mb-2">Shared</h4>
-          <ul className="text-sm text-base-content/70 space-y-1">
-            <li>
-              <Link to="/#sourcing" className="hover:text-primary">
-                Sourcing &amp; farms
+      <div className="mb-[22px] grid grid-cols-2 gap-x-3 gap-y-[18px] lg:contents">
+        {columns.map((col) => (
+          <div key={col.head} className="flex flex-col gap-[7px] lg:gap-[9px]">
+            <span className="font-archivo font-semibold text-[10px] lg:text-[10.5px] leading-none tracking-[.16em] uppercase text-sop-ink-50">
+              {col.head}
+            </span>
+            {col.items.map((item) => (
+              <Link
+                key={item.label}
+                to={item.to}
+                className="font-archivo text-[12.5px] leading-[1.5] text-sop-ink-70 hover:text-sop-ember lg:text-[13px]"
+              >
+                {item.label}
               </Link>
-            </li>
-            <li>
-              <Link to="/#coldchain" className="hover:text-primary">
-                The cold chain
-              </Link>
-            </li>
-            <li>
-              <Link to="/#compliance" className="hover:text-primary">
-                Quality &amp; compliance
-              </Link>
-            </li>
-            <li>
-              <Link to="/#cuts" className="hover:text-primary">
-                Cut guides &amp; recipes
-              </Link>
-            </li>
-          </ul>
-        </div>
+            ))}
+          </div>
+        ))}
+      </div>
 
-        <div>
-          <h4 className="font-semibold mb-2">Two doors</h4>
-          <ul className="text-sm text-base-content/70 space-y-1">
-            <li>
-              <Link to="/catalogue" className="hover:text-primary">
-                Home cook catalogue
-              </Link>
-            </li>
-            <li>
-              <Link to="/wholesale" className="hover:text-primary">
-                Trade accounts
-              </Link>
-            </li>
-            <li>
-              <Link to="/orders" className="hover:text-primary">
-                Your orders
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        <div id="contact">
-          <h4 className="font-semibold mb-2">Contact</h4>
-          <ul className="text-sm text-base-content/70 space-y-1">
-            <li>Cold room: Bommasandra, Bengaluru</li>
-            <li>Trade desk: trade@sliceofpink.in</li>
-            <li>Home orders: hello@sliceofpink.in</li>
-            <li>+91 98860 41207</li>
-          </ul>
-          <p className="text-xs text-base-content/40 mt-3">
-            FSSAI 10024xxxxxxxxx · GSTIN 29AAxxxxxxxZ5
-          </p>
-        </div>
+      <div id="contact" className="flex flex-col gap-[7px] border-t border-sop-bone-300 pt-3.5 lg:hidden">
+        <span className="font-plex text-[11px] leading-[1.6] text-sop-ink-50">
+          Cold room: Bommasandra, Bengaluru · trade@sliceofpink.in · +91 98860 41207
+        </span>
+        <span className="font-plex text-[11px] leading-[1.6] text-sop-ink-50">
+          FSSAI licence 10021064000000 · GSTIN 29ABCDE1234F1Z5
+        </span>
+        <span className="font-plex text-[11px] leading-[1.6] text-sop-ink-50">
+          Contains non-vegetarian products. Store as marked.
+        </span>
       </div>
     </footer>
   );

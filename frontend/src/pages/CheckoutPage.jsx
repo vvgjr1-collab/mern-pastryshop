@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { ArrowLeftIcon } from "lucide-react";
 import toast from "react-hot-toast";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -56,13 +55,9 @@ const CheckoutPage = () => {
     return () => window.removeEventListener("cart:updated", sync);
   }, []);
 
-  const subtotal = cart.lines.reduce(
-    (sum, line) => sum + line.unitPrice * line.quantity,
-    0
-  );
+  const subtotal = cart.lines.reduce((s, l) => s + l.unitPrice * l.quantity, 0);
   const deliveryFee =
     isWholesale || subtotal >= RETAIL.freeDeliveryOver ? 0 : RETAIL.deliveryFee;
-
   const slots = isWholesale ? WHOLESALE.windows : RETAIL.slots;
 
   const set = (key) => (e) =>
@@ -87,9 +82,7 @@ const CheckoutPage = () => {
       return;
     }
     if (!form.deliverySlot) {
-      toast.error(
-        isWholesale ? "Pick a delivery window" : "Pick a delivery slot"
-      );
+      toast.error(isWholesale ? "Pick a delivery window" : "Pick a delivery slot");
       return;
     }
 
@@ -101,7 +94,7 @@ const CheckoutPage = () => {
         userId,
         items: cart.lines.map((line) => ({
           productId: line.productId,
-          sku: line.sku,
+          sku: line.sku, // lets the server resolve a demo line by SKU
           quantity: line.quantity,
         })),
         customer: {
@@ -124,13 +117,9 @@ const CheckoutPage = () => {
     } catch (error) {
       console.log("Error placing order", error);
       if (error.response?.status === 429) {
-        toast.error("Slow down — too many requests in a row", {
-          duration: 4000,
-        });
+        toast.error("Slow down — too many requests in a row", { duration: 4000 });
       } else {
-        toast.error(
-          error.response?.data?.message || "Failed to place the order"
-        );
+        toast.error(error.response?.data?.message || "Failed to place the order");
       }
     } finally {
       setLoading(false);
@@ -138,256 +127,247 @@ const CheckoutPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-base-200">
+    <div className="min-h-screen bg-sop-bone-100">
       <Navbar />
 
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto">
-          <Link to="/cart" className="btn btn-ghost mb-6">
-            <ArrowLeftIcon className="size-5" />
-            Back to the basket
+      <div className="grid lg:grid-cols-[1fr_430px]">
+        {/* --------------------------- form ---------------------------- */}
+        <div className="border-b border-sop-bone-300 px-4 pb-8 pt-6 lg:border-b-0 lg:border-r lg:px-10 lg:pb-12 lg:pt-10">
+          <Link
+            to="/cart"
+            className="mb-5 inline-block font-plex text-[13px] leading-none text-sop-ink-50 hover:text-sop-ink"
+          >
+            ← Back to the order
           </Link>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            <div className="md:col-span-2 card bg-base-100">
-              <div className="card-body">
-                <h1 className="card-title text-2xl mb-2">
-                  {isWholesale ? "Place wholesale order" : "Checkout"}
-                </h1>
+          <h1 className="font-display text-[38px] leading-[.98] text-sop-ink lg:text-[52px] lg:leading-[.96]">
+            {isWholesale ? "Place wholesale order" : "Delivery"}
+          </h1>
+          <span className="mb-6 mt-1 block font-plex text-[11.5px] leading-[1.5] text-sop-ink-50 lg:text-xs">
+            Chilled lines are cut the morning of the slot. Frozen lines travel gel-packed.
+          </span>
 
-                {trackMismatch && (
-                  <div className="alert alert-warning mb-4 text-sm">
-                    <span>
-                      This basket is priced in cases, but your trade account
-                      isn't active in this browser.{" "}
-                      <Link to="/wholesale" className="link">
-                        Sign back in
-                      </Link>{" "}
-                      to place it.
-                    </span>
-                  </div>
-                )}
+          {trackMismatch && (
+            <div className="mb-5 border-l-2 border-sop-rust bg-sop-blush p-4 font-plex text-[11.5px] leading-[1.6] text-sop-ink-70">
+              This basket is priced in cases, but your trade account isn't active in this browser.{" "}
+              <Link to="/wholesale" className="border-b border-sop-ember text-sop-ink">
+                Sign back in
+              </Link>{" "}
+              to place it.
+            </div>
+          )}
 
-                {isWholesale && account && (
-                  <div className="alert mb-4 text-sm">
-                    <span>
-                      Billing to <strong>{account.businessName}</strong> · GSTIN{" "}
-                      {account.gstin} · FSSAI {account.fssai} ·{" "}
-                      {account.creditTerms}
-                    </span>
-                  </div>
-                )}
+          {isWholesale && account && (
+            <div className="mb-5 bg-sop-bone-200 p-4 font-plex text-[11.5px] leading-[1.6] text-sop-ink-70">
+              Billing to <strong className="text-sop-ink">{account.businessName}</strong> · GSTIN{" "}
+              {account.gstin} · FSSAI {account.fssai} · {account.creditTerms}
+            </div>
+          )}
 
-                <form onSubmit={handleSubmit}>
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <div className="form-control">
-                      <label className="label">
-                        <span className="label-text">Contact name *</span>
-                      </label>
-                      <input
-                        type="text"
-                        className="input input-bordered"
-                        value={form.name}
-                        onChange={set("name")}
-                      />
-                    </div>
+          <form onSubmit={handleSubmit}>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <label className="flex flex-col gap-2">
+                <span className="sop-label">Contact name *</span>
+                <input type="text" className="sop-input" value={form.name} onChange={set("name")} />
+              </label>
 
-                    <div className="form-control">
-                      <label className="label">
-                        <span className="label-text">Phone *</span>
-                      </label>
-                      <input
-                        type="tel"
-                        className="input input-bordered"
-                        value={form.phone}
-                        onChange={set("phone")}
-                      />
-                    </div>
+              <label className="flex flex-col gap-2">
+                <span className="sop-label">Phone *</span>
+                <input type="tel" className="sop-input" value={form.phone} onChange={set("phone")} />
+              </label>
 
-                    <div className="form-control sm:col-span-2">
-                      <label className="label">
-                        <span className="label-text">Email</span>
-                      </label>
-                      <input
-                        type="email"
-                        className="input input-bordered"
-                        value={form.email}
-                        onChange={set("email")}
-                      />
-                    </div>
+              <label className="flex flex-col gap-2 sm:col-span-2">
+                <span className="sop-label">Email</span>
+                <input
+                  type="email"
+                  className="sop-input"
+                  value={form.email}
+                  onChange={set("email")}
+                />
+              </label>
 
-                    <div className="form-control sm:col-span-2">
-                      <label className="label">
-                        <span className="label-text">Delivery address *</span>
-                      </label>
-                      <textarea
-                        className="textarea textarea-bordered h-24"
-                        value={form.address}
-                        onChange={set("address")}
-                      />
-                    </div>
+              <label className="flex flex-col gap-2 sm:col-span-2">
+                <span className="sop-label">Delivery address *</span>
+                <textarea
+                  className="sop-textarea h-24"
+                  placeholder="Kitchen entrance, not the front desk"
+                  value={form.address}
+                  onChange={set("address")}
+                />
+              </label>
 
-                    <div className="form-control">
-                      <label className="label">
-                        <span className="label-text">City</span>
-                      </label>
-                      <input
-                        type="text"
-                        className="input input-bordered"
-                        value={form.city}
-                        onChange={set("city")}
-                      />
-                    </div>
+              <label className="flex flex-col gap-2">
+                <span className="sop-label">City</span>
+                <input type="text" className="sop-input" value={form.city} onChange={set("city")} />
+              </label>
 
-                    <div className="form-control">
-                      <label className="label">
-                        <span className="label-text">Pincode</span>
-                      </label>
-                      <input
-                        type="text"
-                        className="input input-bordered"
-                        value={form.pincode}
-                        onChange={set("pincode")}
-                      />
-                    </div>
+              <label className="flex flex-col gap-2">
+                <span className="sop-label">Pincode</span>
+                <input
+                  type="text"
+                  className="sop-input"
+                  value={form.pincode}
+                  onChange={set("pincode")}
+                />
+              </label>
+            </div>
 
-                    <div className="form-control sm:col-span-2">
-                      <label className="label">
-                        <span className="label-text">
-                          {isWholesale
-                            ? "Delivery window *"
-                            : "Delivery slot *"}
-                        </span>
-                      </label>
-                      <select
-                        className="select select-bordered"
-                        value={form.deliverySlot}
-                        onChange={set("deliverySlot")}
-                      >
-                        <option value="">
-                          {isWholesale
-                            ? "Choose a window"
-                            : "Choose a delivery slot"}
-                        </option>
-                        {slots.map((slot) => (
-                          <option key={slot} value={slot}>
-                            {slot}
-                          </option>
-                        ))}
-                      </select>
-                      {isWholesale && (
-                        <span className="label-text-alt mt-2 text-base-content/60">
-                          Order cut-off: {WHOLESALE.orderCutOff}
-                        </span>
-                      )}
-                    </div>
-
-                    {isWholesale && (
-                      <>
-                        <div className="form-control">
-                          <label className="label">
-                            <span className="label-text">PO reference</span>
-                          </label>
-                          <input
-                            type="text"
-                            className="input input-bordered"
-                            value={form.poReference}
-                            onChange={set("poReference")}
-                          />
-                        </div>
-
-                        <div className="form-control justify-end">
-                          <label className="label cursor-pointer gap-3">
-                            <input
-                              type="checkbox"
-                              className="checkbox checkbox-primary"
-                              checked={form.isStandingOrder}
-                              onChange={set("isStandingOrder")}
-                            />
-                            <span className="label-text">
-                              Repeat this as a standing order
-                            </span>
-                          </label>
-                        </div>
-                      </>
-                    )}
-
-                    <div className="form-control sm:col-span-2">
-                      <label className="label">
-                        <span className="label-text">
-                          Notes for the cold room
-                        </span>
-                      </label>
-                      <textarea
-                        className="textarea textarea-bordered h-20"
-                        placeholder="Cut instructions, gate access, who receives the box"
-                        value={form.notes}
-                        onChange={set("notes")}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="card-actions justify-end mt-6">
+            {/* the slot is part of the product */}
+            <div className="mt-7">
+              <span className="sop-label mb-3">
+                {isWholesale ? "Delivery window *" : "Pick a slot *"}
+              </span>
+              <div className="flex flex-col gap-2">
+                {slots.map((slot) => {
+                  const on = form.deliverySlot === slot;
+                  return (
                     <button
-                      type="submit"
-                      className="btn btn-primary"
-                      disabled={loading || trackMismatch}
+                      key={slot}
+                      type="button"
+                      onClick={() => setForm((prev) => ({ ...prev, deliverySlot: slot }))}
+                      className={`flex items-center justify-between gap-3 border-[1.5px] p-3.5 text-left ${
+                        on
+                          ? "border-sop-ink bg-sop-blush"
+                          : "border-sop-bone-300 bg-sop-bone-100 hover:border-sop-ink"
+                      }`}
                     >
-                      {loading ? "Placing order..." : "Place order"}
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-
-            {/* ------------------------ summary ------------------------ */}
-            <div className="card bg-base-100 h-fit">
-              <div className="card-body">
-                <h2 className="card-title text-lg">Order summary</h2>
-                <ul className="text-sm divide-y divide-base-content/10">
-                  {cart.lines.map((line) => (
-                    <li key={line.productId} className="py-2">
-                      <div className="flex justify-between gap-2">
-                        <span>
-                          {line.quantity} × {line.name}
-                        </span>
-                        <span className="whitespace-nowrap">
-                          {formatINR(line.unitPrice * line.quantity)}
-                        </span>
-                      </div>
-                      <span className="text-xs text-base-content/50">
-                        {line.packLabel}
-                        {line.isPreOrder && " · pre-order"}
+                      <span className="font-medium text-[13.5px] leading-none text-sop-ink lg:text-sm">
+                        {slot}
                       </span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-4 space-y-1 text-sm">
-                  <p className="flex justify-between">
-                    <span>Subtotal</span>
-                    <span>{formatINR(subtotal)}</span>
-                  </p>
-                  <p className="flex justify-between">
-                    <span>Delivery</span>
-                    <span>
-                      {deliveryFee === 0 ? "Included" : formatINR(deliveryFee)}
-                    </span>
-                  </p>
-                  <p className="flex justify-between text-lg font-bold text-primary pt-2">
-                    <span>Total</span>
-                    <span>{formatINR(subtotal + deliveryFee)}</span>
-                  </p>
-                </div>
-
-                <p className="text-xs text-base-content/50 mt-3">
-                  {isWholesale
-                    ? "Invoiced against your account terms. No card is taken here."
-                    : "Payment is collected on delivery."}
-                </p>
+                      <span
+                        className={`font-plex text-[11px] leading-none ${
+                          on ? "text-sop-rust" : "text-sop-ink-50"
+                        }`}
+                      >
+                        {on ? "selected" : "open"}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
+              {isWholesale && (
+                <span className="sop-note mt-3 block">Order cut-off: {WHOLESALE.orderCutOff}</span>
+              )}
             </div>
+
+            {isWholesale && (
+              <div className="mt-7 grid gap-4 sm:grid-cols-2">
+                <label className="flex flex-col gap-2">
+                  <span className="sop-label">PO reference</span>
+                  <input
+                    type="text"
+                    className="sop-input"
+                    value={form.poReference}
+                    onChange={set("poReference")}
+                  />
+                </label>
+
+                <label className="flex cursor-pointer items-start gap-2.5 border border-sop-bone-300 p-3.5 sm:mt-7">
+                  <input
+                    type="checkbox"
+                    className="mt-0.5 h-3.5 w-3.5 accent-sop-ink"
+                    checked={form.isStandingOrder}
+                    onChange={set("isStandingOrder")}
+                  />
+                  <span className="flex flex-col gap-1.5">
+                    <span className="font-medium text-[12.5px] leading-[1.3] text-sop-ink">
+                      Repeat this as a standing order
+                    </span>
+                    <span className="font-plex text-[11px] leading-[1.5] text-sop-ink-50">
+                      Same lines, same window, every week until you stop it.
+                    </span>
+                  </span>
+                </label>
+              </div>
+            )}
+
+            <label className="mt-7 flex flex-col gap-2">
+              <span className="sop-label">Notes for the cold room</span>
+              <textarea
+                className="sop-textarea h-20"
+                placeholder="Cut instructions, gate access, who receives the box"
+                value={form.notes}
+                onChange={set("notes")}
+              />
+            </label>
+
+            <div className="mt-7 flex items-center justify-between gap-5 bg-sop-ink p-5">
+              <div className="flex flex-col gap-1.5">
+                <span className="font-archivo font-semibold text-[10.5px] leading-none tracking-[.16em] uppercase text-sop-loin">
+                  Rather order by message?
+                </span>
+                <span className="font-plex text-[11.5px] leading-[1.6] text-sop-ash">
+                  Send the order to the counter on WhatsApp — same prices, same slots, a person on
+                  the other end.
+                </span>
+              </div>
+              <span className="hidden whitespace-nowrap font-plex text-[11.5px] leading-none text-sop-bone-100 sm:block">
+                +91 98860 41207
+              </span>
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading || trackMismatch}
+              className="sop-btn-ember mt-4 w-full lg:hidden"
+            >
+              {loading ? "Placing order…" : `Place order · ${formatINR(subtotal + deliveryFee)}`}
+            </button>
+          </form>
+        </div>
+
+        {/* -------------------------- summary -------------------------- */}
+        <div className="bg-sop-bone-200 px-4 pb-10 pt-6 lg:px-8 lg:pb-11 lg:pt-10">
+          <span className="sop-eyebrow mb-4 block text-sop-ink-50">Summary</span>
+
+          <div className="mb-4 border-t border-sop-ink">
+            {cart.lines.map((line) => (
+              <div key={line.productId} className="border-b border-sop-bone-300 py-2.5">
+                <div className="flex justify-between gap-3">
+                  <span className="text-[13.5px] leading-[1.4] text-sop-ink">
+                    {line.quantity} × {line.name}
+                  </span>
+                  <span className="whitespace-nowrap font-plex text-[13px] leading-[1.4] text-sop-ink">
+                    {formatINR(line.unitPrice * line.quantity)}
+                  </span>
+                </div>
+                <span className="mt-1 block font-plex text-[10.5px] leading-none text-sop-ink-50">
+                  {line.packLabel}
+                  {line.isPreOrder && " · pre-order"}
+                </span>
+              </div>
+            ))}
           </div>
+
+          <div className="mb-4 flex justify-between gap-4 border-b border-sop-bone-300 pb-2.5">
+            <span className="text-[13.5px] leading-[1.4] text-sop-ink-70">Delivery</span>
+            <span className="font-plex text-[13px] leading-[1.4] text-sop-ink">
+              {deliveryFee === 0 ? "Included" : formatINR(deliveryFee)}
+            </span>
+          </div>
+
+          <div className="mb-1.5 flex items-baseline justify-between gap-4">
+            <span className="font-archivo font-semibold text-[11px] leading-none tracking-[.14em] uppercase text-sop-ink">
+              Total
+            </span>
+            <span className="font-medium text-[26px] leading-none text-sop-ink lg:text-[34px]">
+              {formatINR(subtotal + deliveryFee)}
+            </span>
+          </div>
+          <span className="sop-note mb-5 block">
+            {isWholesale
+              ? "Invoiced against your account terms. No card is taken here."
+              : "Inclusive of taxes · payment collected on delivery."}
+          </span>
+
+          <button
+            type="button"
+            disabled={loading || trackMismatch}
+            onClick={handleSubmit}
+            className="sop-btn-ember hidden w-full lg:inline-flex lg:min-h-[56px] lg:text-[12.5px]"
+          >
+            {loading ? "Placing order…" : `Place order · ${formatINR(subtotal + deliveryFee)}`}
+          </button>
         </div>
       </div>
 

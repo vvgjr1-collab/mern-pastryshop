@@ -27,6 +27,19 @@ const productSchema = new mongoose.Schema(
       enum: ["pork", "cold-cuts", "steak", "seafood", "poultry"],
       index: true,
     },
+    // Pork primal, for the cut guide's carcass map. Empty on anything that
+    // doesn't come off a pig.
+    primal: {
+      type: String,
+      enum: ["shoulder", "loin", "belly", "ribs", "leg", "trim", ""],
+      default: "",
+      index: true,
+    },
+    // Cooking methods this cut suits — drives the cut guide's method filter.
+    methods: {
+      type: [String],
+      default: [],
+    },
     description: {
       type: String,
       default: "",

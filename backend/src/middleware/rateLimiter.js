@@ -1,6 +1,9 @@
 import ratelimit from "../config/upstash.js";
 
 const rateLimiter = async (req, res, next) => {
+  // no Upstash configured (local dev) — nothing to limit against
+  if (!ratelimit) return next();
+
   try {
     const { success } = await ratelimit.limit("my-limit-key"); //if auth was there, we would put userId instead of "my-limit-key"
 

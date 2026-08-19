@@ -1,29 +1,15 @@
-import { ZapIcon } from "lucide-react";
+import React from "react";
 
 const RateLimitedUI = () => {
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      <div className="bg-primary/10 border border-primary/30 rounded-lg shadow-md">
-        <div className="flex flex-col md:flex-row items-center p-6">
-          <div className="flex-shrink-0 bg-primary/20 p-4 rounded-full mb-4 md:mb-0 md:mr-6">
-            <ZapIcon className="size-10 text-primary" />
-          </div>
-
-          <div className="flex-1 text-center md:text-left">
-            <h3 className="text-xl font-bold mb-2">Rate Limit Reached</h3>
-
-            <p className="text-base-content mb-1">
-              Too many requests to the catalogue in a short period. Please wait a
-              moment.
-            </p>
-
-            <p className="text-sm text-base-content/70">
-              Trade buyers placing a large order: your account contact can take it
-              over the phone.
-            </p>
-          </div>
-        </div>
-      </div>
+    <div className="border-b border-sop-bone-300 bg-sop-blush px-4 py-5 lg:px-11">
+      <span className="sop-eyebrow mb-2 block text-sop-rust">Rate limit reached</span>
+      <p className="max-w-[60ch] text-[14px] leading-[1.6] text-sop-ink-70">
+        Too many requests to the catalogue in a short period. Wait a moment and try again.
+      </p>
+      <p className="mt-2 font-plex text-[11.5px] leading-[1.6] text-sop-rust">
+        Trade buyers placing a large order: the desk will take it on WhatsApp — +91 98860 41207.
+      </p>
     </div>
   );
 };

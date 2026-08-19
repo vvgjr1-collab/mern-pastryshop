@@ -1,6 +1,8 @@
 const demoProducts = [
   {
     _id: "demo-belly",
+    primal: "belly",
+    methods: ["Roast", "Braise", "Cure"],
     name: "Berkshire Pork Belly, Skin-On",
     sku: "SOP-PRK-101",
     category: "pork",
@@ -33,6 +35,8 @@ const demoProducts = [
   },
   {
     _id: "demo-coppa",
+    primal: "shoulder",
+    methods: ["Cure"],
     name: "Coppa (Capocollo), Whole Muscle",
     sku: "SOP-CUT-301",
     category: "cold-cuts",
@@ -66,6 +70,8 @@ const demoProducts = [
   },
   {
     _id: "demo-salmon",
+    primal: "",
+    methods: ["Fry", "Roast"],
     name: "Norwegian Salmon Fillet, Skin-On",
     sku: "SOP-FSH-401",
     category: "seafood",
@@ -99,6 +105,8 @@ const demoProducts = [
   },
   {
     _id: "demo-steak",
+    primal: "",
+    methods: ["Grill", "Fry"],
     name: "MSA Striploin Steak, 22 mm",
     sku: "SOP-BEF-201",
     category: "steak",
@@ -136,6 +144,8 @@ const demoProducts = [
   },
   {
     _id: "demo-bratwurst",
+    primal: "trim",
+    methods: ["Grill", "Fry"],
     name: "Bratwurst, Coarse Ground",
     sku: "SOP-PRK-202",
     category: "pork",
@@ -167,6 +177,8 @@ const demoProducts = [
   },
   {
     _id: "demo-turkey",
+    primal: "",
+    methods: ["Roast"],
     name: "Bronze Turkey Crown, Seasonal",
     sku: "SOP-PTR-601",
     category: "poultry",

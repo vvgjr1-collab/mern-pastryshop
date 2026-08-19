@@ -1,3 +1,66 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Direction 1d atoms, straight off Foundations 1e. Square corners everywhere,
+   no pills, no shadows — separation comes from hairlines and flat bone/blush
+   fields. Actions are 48px minimum. */
+@layer components {
+  .sop-eyebrow {
+    @apply font-archivo font-semibold text-[10px] lg:text-[11px] leading-none tracking-[.18em] lg:tracking-[.2em] uppercase;
+  }
+
+  /* label caps left, mono value right — the spec row is the PDP unit */
+  .sop-key {
+    @apply font-archivo font-semibold text-[10.5px] leading-[1.4] tracking-[.12em] uppercase text-sop-ink-50;
+  }
+  .sop-val {
+    @apply font-plex text-[12.5px] leading-[1.5] text-sop-ink text-right;
+  }
+  .sop-row {
+    @apply flex justify-between gap-4 py-[11px] border-b border-sop-bone-200;
+  }
+
+  .sop-btn {
+    @apply inline-flex items-center justify-center min-h-[48px] px-5 font-archivo font-semibold text-xs leading-none tracking-[.1em] uppercase transition-colors duration-[120ms];
+  }
+  .sop-btn-ember {
+    @apply inline-flex items-center justify-center min-h-[48px] px-5 font-archivo font-semibold text-xs leading-none tracking-[.1em] uppercase transition-colors duration-[120ms] bg-sop-ember text-sop-bone-100 hover:bg-sop-ember-dark disabled:bg-sop-ink-50 disabled:cursor-not-allowed;
+  }
+  .sop-btn-ink {
+    @apply inline-flex items-center justify-center min-h-[48px] px-5 font-archivo font-semibold text-xs leading-none tracking-[.1em] uppercase transition-colors duration-[120ms] bg-sop-ink text-sop-bone-100 hover:bg-black disabled:bg-sop-ink-50 disabled:cursor-not-allowed;
+  }
+  .sop-btn-loin {
+    @apply inline-flex items-center justify-center min-h-[48px] px-5 font-archivo font-semibold text-xs leading-none tracking-[.1em] uppercase transition-colors duration-[120ms] bg-sop-loin text-sop-ink hover:bg-sop-blush;
+  }
+  .sop-btn-outline {
+    @apply inline-flex items-center justify-center min-h-[48px] px-5 font-archivo font-semibold text-xs leading-none tracking-[.1em] uppercase transition-colors duration-[120ms] border-[1.5px] border-sop-ink text-sop-ink hover:bg-sop-ink hover:text-sop-bone-100;
+  }
+  .sop-btn-outline-light {
+    @apply inline-flex items-center justify-center min-h-[48px] px-5 font-archivo font-semibold text-xs leading-none tracking-[.1em] uppercase transition-colors duration-[120ms] border-[1.5px] border-sop-ink-50 text-sop-bone-100 hover:border-sop-loin;
+  }
+
+  .sop-chip-on {
+    @apply inline-flex items-center justify-center px-3.5 py-2.5 min-h-[44px] font-archivo font-semibold text-[10.5px] leading-none tracking-[.12em] uppercase cursor-pointer bg-sop-ink text-sop-bone-100 border border-sop-ink whitespace-nowrap;
+  }
+  .sop-chip-off {
+    @apply inline-flex items-center justify-center px-3.5 py-2.5 min-h-[44px] font-archivo font-semibold text-[10.5px] leading-none tracking-[.12em] uppercase cursor-pointer border border-sop-bone-300 bg-sop-bone-100 text-sop-ink-70 hover:border-sop-ink hover:text-sop-ink whitespace-nowrap;
+  }
+
+  .sop-label {
+    @apply block font-archivo font-semibold text-[10px] leading-none tracking-[.14em] uppercase text-sop-ink-50;
+  }
+  .sop-input {
+    @apply h-12 w-full px-3 border border-sop-bone-400 bg-sop-bone-100 font-plex text-[13.5px] text-sop-ink outline-none focus:border-sop-ink placeholder:text-sop-ink-40;
+  }
+  .sop-textarea {
+    @apply w-full p-3 border border-sop-bone-400 bg-sop-bone-100 font-plex text-[13.5px] leading-[1.6] text-sop-ink outline-none focus:border-sop-ink placeholder:text-sop-ink-40;
+  }
+  .sop-select {
+    @apply h-12 w-full px-3 border border-sop-bone-400 bg-sop-bone-100 font-plex text-[13.5px] text-sop-ink outline-none focus:border-sop-ink;
+  }
+
+  .sop-note {
+    @apply font-plex text-[11.5px] leading-[1.6] text-sop-ink-50;
+  }
+}

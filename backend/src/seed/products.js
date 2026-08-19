@@ -5,6 +5,8 @@ const products = [
   {
     name: "Berkshire Pork Belly, Skin-On",
     sku: "SOP-PRK-101",
+    primal: "belly",
+    methods: ["Roast", "Braise", "Cure"],
     category: "pork",
     image: "🥓",
     description:
@@ -47,6 +49,8 @@ const products = [
   {
     name: "Pork Loin Steaks, Centre-Cut",
     sku: "SOP-PRK-102",
+    primal: "loin",
+    methods: ["Grill", "Fry"],
     category: "pork",
     image: "🍖",
     description:
@@ -89,6 +93,8 @@ const products = [
   {
     name: "Pork Shoulder (Boston Butt), Boneless",
     sku: "SOP-PRK-103",
+    primal: "shoulder",
+    methods: ["Braise", "Roast", "Smoke"],
     category: "pork",
     image: "🐖",
     description:
@@ -132,6 +138,8 @@ const products = [
   {
     name: "Dry-Cured Streaky Bacon, 2 mm",
     sku: "SOP-PRK-201",
+    primal: "belly",
+    methods: ["Fry", "Grill"],
     category: "pork",
     image: "🥓",
     description:
@@ -174,6 +182,8 @@ const products = [
   {
     name: "Bratwurst, Coarse Ground",
     sku: "SOP-PRK-202",
+    primal: "trim",
+    methods: ["Grill", "Fry"],
     category: "pork",
     image: "🌭",
     description:
@@ -215,6 +225,8 @@ const products = [
   {
     name: "Chorizo Picante, Fresh",
     sku: "SOP-PRK-203",
+    primal: "trim",
+    methods: ["Fry", "Braise"],
     category: "pork",
     image: "🌶️",
     description:
@@ -258,6 +270,8 @@ const products = [
   {
     name: "Coppa (Capocollo), Whole Muscle",
     sku: "SOP-CUT-301",
+    primal: "shoulder",
+    methods: ["Cure"],
     category: "cold-cuts",
     image: "🍑",
     description:
@@ -301,6 +315,8 @@ const products = [
   {
     name: "Pancetta Tesa, Flat-Cured",
     sku: "SOP-CUT-302",
+    primal: "belly",
+    methods: ["Cure", "Fry"],
     category: "cold-cuts",
     image: "🥓",
     description:
@@ -343,6 +359,8 @@ const products = [
   {
     name: "Mortadella with Pistachio",
     sku: "SOP-CUT-303",
+    primal: "trim",
+    methods: ["Cure"],
     category: "cold-cuts",
     image: "🫒",
     description:
@@ -388,6 +406,8 @@ const products = [
   {
     name: "Picanha (Rump Cap), Fat On",
     sku: "SOP-STK-401",
+    primal: "",
+    methods: ["Grill", "Roast"],
     category: "steak",
     image: "🔥",
     description:
@@ -433,6 +453,8 @@ const products = [
   {
     name: "Ribeye, Grain-Fed MB 2+",
     sku: "SOP-STK-402",
+    primal: "",
+    methods: ["Grill", "Fry"],
     category: "steak",
     image: "🥩",
     description:
@@ -476,6 +498,8 @@ const products = [
   {
     name: "Tenderloin Medallions",
     sku: "SOP-STK-403",
+    primal: "",
+    methods: ["Fry", "Grill"],
     category: "steak",
     image: "🍽️",
     description: "Centre-cut fillet medallions, 180 g, 35 mm, silverskin off.",
@@ -519,6 +543,8 @@ const products = [
   {
     name: "Atlantic Salmon Fillet, Skin-On",
     sku: "SOP-SEA-501",
+    primal: "",
+    methods: ["Fry", "Roast"],
     category: "seafood",
     image: "🐟",
     description:
@@ -563,6 +589,8 @@ const products = [
   {
     name: "Tiger Prawns 16/20, PDTO",
     sku: "SOP-SEA-502",
+    primal: "",
+    methods: ["Fry", "Grill"],
     category: "seafood",
     image: "🦐",
     description:
@@ -607,6 +635,8 @@ const products = [
   {
     name: "Whole Turkey, Free-Range",
     sku: "SOP-POU-601",
+    primal: "",
+    methods: ["Roast"],
     category: "poultry",
     image: "🦃",
     description:
@@ -656,6 +686,8 @@ const products = [
   {
     name: "Duck Breast (Magret), Skin-On",
     sku: "SOP-POU-602",
+    primal: "",
+    methods: ["Fry", "Roast"],
     category: "poultry",
     image: "🦆",
     description:

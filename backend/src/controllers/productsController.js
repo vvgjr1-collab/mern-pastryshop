@@ -13,7 +13,18 @@ export function serializeForTrack(product, track) {
     ...rest,
     // spec sheet downloads are a wholesale feature; the numbers stay public
     spec: { ...spec, specSheetUrl: "" },
-    wholesale: null,
+    // Case sizes and MOQ are public — a chef should be able to see what a case
+    // looks like before applying. The rate card is not: per-kg pricing and
+    // trade stock never leave the building without an approved account.
+    wholesale: wholesale
+      ? {
+          caseSizeKg: wholesale.caseSizeKg,
+          moqCases: wholesale.moqCases,
+          leadTimeDays: wholesale.leadTimeDays,
+          pricePerKg: null,
+          stockCases: null,
+        }
+      : null,
   };
 }
 
