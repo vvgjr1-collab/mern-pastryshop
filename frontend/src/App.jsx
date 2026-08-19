@@ -8,13 +8,14 @@ import CheckoutPage from "./pages/CheckoutPage";
 import OrdersPage from "./pages/OrdersPage";
 import OrderDetailPage from "./pages/OrderDetailPage";
 import WholesalePage from "./pages/WholesalePage";
+import CanadaStoryPage from "./pages/CanadaStoryPage";
+import ColdChainPage from "./pages/ColdChainPage";
+import CutGuidePage from "./pages/CutGuidePage";
 //import toast from "react-hot-toast";
 
 const App = () => {
   return (
-    <div className="relative h-full w-full">
-      <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_60%,#f0629240_100%)]" />
-
+    <div className="relative min-h-screen w-full bg-sop-bone-300">
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/catalogue" element={<CataloguePage />} />
@@ -24,6 +25,9 @@ const App = () => {
         <Route path="/orders" element={<OrdersPage />} />
         <Route path="/order/:id" element={<OrderDetailPage />} />
         <Route path="/wholesale" element={<WholesalePage />} />
+        <Route path="/canada-story" element={<CanadaStoryPage />} />
+        <Route path="/cold-chain" element={<ColdChainPage />} />
+        <Route path="/cut-guide" element={<CutGuidePage />} />
       </Routes>
     </div>
   );

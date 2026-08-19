@@ -1,23 +1,20 @@
 import React from "react";
-import { PackageOpenIcon } from "lucide-react";
 import { Link } from "react-router";
 
 const EmptyState = ({
-  icon: Icon = PackageOpenIcon,
   title = "Nothing here yet",
   message = "",
   actionLabel = "",
   actionTo = "",
 }) => {
   return (
-    <div className="flex flex-col items-center justify-center py-16 space-y-6 max-w-md mx-auto text-center">
-      <div className="bg-primary/10 rounded-full p-8">
-        <Icon className="size-10 text-primary" />
-      </div>
-      <h3 className="text-2xl font-bold">{title}</h3>
-      {message && <p className="text-base-content/70">{message}</p>}
+    <div className="mx-auto max-w-md px-4 py-16 text-center">
+      <h3 className="mb-3 font-display text-[30px] leading-[1.05] text-sop-ink">{title}</h3>
+      {message && (
+        <p className="mb-6 font-plex text-xs leading-[1.7] text-sop-ink-50">{message}</p>
+      )}
       {actionLabel && actionTo && (
-        <Link to={actionTo} className="btn btn-primary">
+        <Link to={actionTo} className="sop-btn-outline">
           {actionLabel}
         </Link>
       )}

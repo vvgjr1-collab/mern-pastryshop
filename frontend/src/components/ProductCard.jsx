@@ -1,14 +1,14 @@
 import { Link } from "react-router";
-import { PlusIcon } from "lucide-react";
 import toast from "react-hot-toast";
 import { formatINR } from "../lib/utils";
 import { addToCart } from "../lib/cart";
-import ChainBadge from "./ChainBadge";
+import { CHAINS } from "../lib/trade";
+import Hatch from "./Hatch";
+import NonVegMark from "./NonVegMark";
 
 const ProductCard = ({ product, track }) => {
   const isWholesale = track === "wholesale" && product.wholesale;
-  const isPreOrder =
-    product.seasonal?.isSeasonal && product.seasonal?.preOrderOpen;
+  const isPreOrder = product.seasonal?.isSeasonal && product.seasonal?.preOrderOpen;
 
   const unitPrice = isWholesale
     ? product.wholesale.pricePerKg * product.wholesale.caseSizeKg
@@ -18,10 +18,11 @@ const ProductCard = ({ product, track }) => {
     ? `${product.wholesale.caseSizeKg} kg case`
     : `${product.retail.packSizeG} g pack`;
 
-  const stock = isWholesale
-    ? product.wholesale.stockCases
-    : product.retail.stockPacks;
+  const perKg = isWholesale
+    ? product.wholesale.pricePerKg
+    : Math.round((product.retail.price / product.retail.packSizeG) * 1000);
 
+  const stock = isWholesale ? product.wholesale.stockCases : product.retail.stockPacks;
   const minQty = isWholesale ? product.wholesale.moqCases || 1 : 1;
   const soldOut = !isPreOrder && stock < minQty;
 
@@ -44,109 +45,67 @@ const ProductCard = ({ product, track }) => {
       isWholesale ? "wholesale" : "retail"
     );
 
-    toast.success(`${product.name} added — ${minQty} × ${packLabel}`);
+    toast.success(`${product.name} · ${minQty} × ${packLabel}`);
   };
 
   return (
     <Link
       to={`/product/${product._id}`}
-      className="card bg-base-100 hover:shadow-lg transition-all duration-200
-      border-t-4 border-solid border-primary"
+      className="flex flex-col border border-sop-bone-300 bg-sop-bone-100 transition-colors duration-[120ms] hover:border-sop-ink"
     >
-      <div className="card-body">
-        <div className="flex items-start justify-between gap-2">
+      <Hatch className="flex h-[150px] items-start justify-between p-2.5 lg:h-[190px]">
+        <span className="bg-sop-bone-100 px-2 py-1.5 font-plex font-medium text-[9.5px] leading-none tracking-[.08em] uppercase text-sop-ink">
+          {CHAINS[product.chain]?.label || product.chain}
+        </span>
+        <NonVegMark />
+      </Hatch>
+
+      <div className="flex flex-1 flex-col px-3.5 pb-4 pt-3.5 lg:px-4 lg:pb-[17px] lg:pt-4">
+        <span className="mb-2 block font-archivo font-semibold text-[9.5px] leading-none tracking-[.16em] uppercase text-sop-cured">
+          {product.category.replace("-", " ")}
+          {isPreOrder && ` · pre-order`}
+        </span>
+
+        <span className="mb-1.5 block font-display text-[21px] leading-[1.05] text-sop-ink lg:text-[25px]">
+          {product.name}
+        </span>
+
+        <span className="mb-2 block font-plex text-[10.5px] leading-[1.5] text-sop-ink-50 lg:text-[11px]">
+          {product.sku} · {packLabel}
+        </span>
+
+        <span className="mb-3 block text-[12.5px] leading-[1.55] text-sop-ink-70 line-clamp-2">
+          {product.cutGuide?.whatItIs || product.description}
+        </span>
+
+        <div className="mt-auto flex items-end justify-between gap-3 border-t border-sop-bone-300 pt-3">
           <div>
-            <h3 className="card-title text-base-content">
-              <span className="text-2xl">{product.image}</span>
-              {product.name}
-            </h3>
-            <p className="text-xs font-mono text-base-content/50 mt-1">
-              {product.sku}
-            </p>
-          </div>
-          <ChainBadge chain={product.chain} />
-        </div>
-
-        {/* provenance — the differentiator against someone who just moves boxes */}
-        <p className="text-sm text-base-content/70 line-clamp-2 mt-1">
-          {product.provenance?.farm || product.provenance?.origin}
-          {product.provenance?.breed && ` · ${product.provenance.breed}`}
-          {product.provenance?.grade && ` · ${product.provenance.grade}`}
-          {product.provenance?.catchMethod && ` · ${product.provenance.catchMethod}`}
-        </p>
-
-        {/* cut literacy, in one line, before they even open the page */}
-        <p className="text-sm text-base-content/60 line-clamp-2 italic">
-          {product.cutGuide?.whatItIs}
-        </p>
-
-        <div className="flex flex-wrap gap-1 mt-2">
-          {product.spec?.portionWeightG && (
-            <span className="badge badge-ghost badge-sm">
-              {product.spec.portionWeightG} g ±{product.spec.weightTolerancePct}%
-            </span>
-          )}
-          {product.spec?.thicknessMm && (
-            <span className="badge badge-ghost badge-sm">
-              {product.spec.thicknessMm} mm cut
-            </span>
-          )}
-          {product.spec?.sliceThicknessMm && (
-            <span className="badge badge-ghost badge-sm">
-              {product.spec.sliceThicknessMm} mm slice
-            </span>
-          )}
-          {isPreOrder && (
-            <span className="badge badge-warning badge-sm">
-              Pre-order · {product.seasonal.season}
-            </span>
-          )}
-        </div>
-
-        <div className="card-actions justify-between items-end mt-4">
-          <div>
-            <p className="text-lg font-bold text-primary">
+            <span className="block font-medium text-[17px] leading-none text-sop-ink">
               {formatINR(unitPrice)}
-              <span className="text-xs font-normal text-base-content/60">
-                {" "}
-                / {packLabel}
-              </span>
-            </p>
-            {isWholesale ? (
-              <p className="text-xs text-base-content/50">
-                {formatINR(product.wholesale.pricePerKg)}/kg · MOQ{" "}
-                {product.wholesale.moqCases} case
-                {product.wholesale.moqCases > 1 ? "s" : ""}
-              </p>
-            ) : (
-              <p className="text-xs text-base-content/50">
-                {formatINR(
-                  Math.round((product.retail.price / product.retail.packSizeG) * 1000)
-                )}
-                /kg
-              </p>
-            )}
-            <p
-              className={`text-xs mt-1 ${
-                soldOut ? "text-error" : "text-success"
+            </span>
+            <span className="mt-1.5 block font-plex text-[10.5px] leading-none text-sop-ink-50">
+              {formatINR(perKg)} / kg
+              {isWholesale && ` · MOQ ${minQty}`}
+            </span>
+            <span
+              className={`mt-1.5 block font-plex text-[10px] leading-none ${
+                soldOut ? "text-sop-cured" : "text-sop-ink-50"
               }`}
             >
               {isPreOrder
                 ? "Pre-order open"
                 : soldOut
                 ? "Out of stock"
-                : `${stock} ${isWholesale ? "case" : "pack"}${
-                    stock === 1 ? "" : "s"
-                  } in stock`}
-            </p>
+                : `${stock} ${isWholesale ? "case" : "pack"}${stock === 1 ? "" : "s"} in stock`}
+            </span>
           </div>
 
           <button
-            className="btn btn-primary btn-sm"
+            type="button"
+            className="sop-btn-outline min-h-[44px] px-4 text-[10.5px] disabled:border-sop-bone-400 disabled:text-sop-ink-40 disabled:hover:bg-transparent disabled:hover:text-sop-ink-40"
             onClick={handleAdd}
             disabled={soldOut}
           >
-            <PlusIcon className="size-4" />
             Add
           </button>
         </div>

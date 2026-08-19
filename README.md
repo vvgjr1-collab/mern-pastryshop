@@ -10,7 +10,17 @@ A meat wholesaler's storefront — processed pork, charcuterie, steak, seafood a
 2. **Inventory** (`/catalogue`) — every SKU with its chain, provenance, cut guide and spec. Filter by category, cold chain, season, or search. `/product/:id` teaches the cut.
 3. **Ordering** (`/cart` → `/checkout` → `/orders`) — retail packs or wholesale cases, minimum-order rules, delivery slots/windows, standing orders, cancel and reorder.
 
-The same SKU exists in both tracks with different pack sizes and pricing visibility. **Wholesale rates are stripped server-side for consumer requests** (`backend/src/controllers/productsController.js` → `serializeForTrack`), so they cannot leak by crafting a request.
+Plus the shared spine: `/canada-story` (sourcing, with the live grading classes), `/cold-chain` (the lot log — two sample lots, one held and one broken, with the probe trace and a °C/°F toggle), `/cut-guide` (the carcass map, filtered by cooking method, listing the SKUs we actually carry from each primal) and `/wholesale` (the gated trade door).
+
+The same SKU exists in both tracks with different pack sizes and pricing visibility. Case sizes, MOQ and lead time are public — a chef should see what a case looks like before applying — but **per-kg rates, trade stock and spec sheets are stripped server-side for consumer requests** (`backend/src/controllers/productsController.js` → `serializeForTrack`), so they cannot leak by crafting a request.
+
+## Design
+
+The whole storefront runs on design direction **1d** from the handoff: Instrument Serif display, Archivo body, IBM Plex Mono for specs and units. Bone ground, blush and loin pink fields, charcoal for trade surfaces, one ember accent for actions and Chill 400 reserved for cold-chain state. Square corners everywhere, no pills, no shadows — separation comes from hairlines and flat fields, and every action is at least 48px tall.
+
+- Palette and fonts: `frontend/tailwind.config.js` under the `sop-*` namespace.
+- Atoms (`sop-btn-*`, `sop-chip-*`, `sop-key` / `sop-val` spec rows, `sop-input`): `frontend/src/index.css`.
+- Wholesale inverts to charcoal so a buyer always knows which side of the house they are on.
 
 ## Backend
 
@@ -70,7 +80,7 @@ Implemented using the MERN Stack
 
 - **React**
 - **Vite**
-- **TailwindCSS** + **daisyUI** <span style="color:grey;">custom "slice" theme</span>
+- **TailwindCSS** <span style="color:grey;">design direction 1d, `sop-*` tokens</span>
 - **Axios** <span style="color:grey;">HTTP client for making API requests</span>
 
 ### Backend
