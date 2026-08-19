@@ -11,6 +11,7 @@ import WholesalePage from "./pages/WholesalePage";
 import CanadaStoryPage from "./pages/CanadaStoryPage";
 import ColdChainPage from "./pages/ColdChainPage";
 import CutGuidePage from "./pages/CutGuidePage";
+import StickyBar from "./components/StickyBar";
 //import toast from "react-hot-toast";
 
 const App = () => {
@@ -29,6 +30,8 @@ const App = () => {
         <Route path="/cold-chain" element={<ColdChainPage />} />
         <Route path="/cut-guide" element={<CutGuidePage />} />
       </Routes>
+
+      <StickyBar />
     </div>
   );
 };

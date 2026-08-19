@@ -57,7 +57,7 @@ const categoryShots = {
 };
 
 const sourcingStats = [
-  { n: "5", label: "farms and plants, all audited" },
+  { n: "3", label: "processors, all CFIA-audited" },
   { n: "100%", label: "lots traceable to farm" },
   { n: "7 yr", label: "working the same barns" },
 ];

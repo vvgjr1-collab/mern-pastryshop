@@ -18,10 +18,11 @@ const products = [
     thawing: "",
     shelfLife: "7 days chilled from dispatch",
     provenance: {
-      farm: "Nandini Farms, Kodagu",
+      farm: "Maple Ridge · EST 243",
       breed: "Berkshire",
-      feed: "Maize, soy meal and spent grain, no meat meal",
-      origin: "Karnataka, India",
+      feed: "Barley, peas and canola meal, no meat meal",
+      origin: "British Columbia, Canada",
+      grade: "Canada 2 · bought on purpose for slabs",
     },
     cutGuide: {
       whatItIs:
@@ -61,10 +62,11 @@ const products = [
     thawing: "",
     shelfLife: "10 days chilled, vacuum sealed",
     provenance: {
-      farm: "Nandini Farms, Kodagu",
+      farm: "Fraser Valley · EST 118",
       breed: "Berkshire × Large White",
-      feed: "Maize, soy meal and spent grain, no meat meal",
-      origin: "Karnataka, India",
+      feed: "Barley, peas and canola meal, no meat meal",
+      origin: "British Columbia, Canada",
+      grade: "Canada 1",
     },
     cutGuide: {
       whatItIs:
@@ -107,10 +109,11 @@ const products = [
       "48 hours in the chiller at 2–4 °C, in its bag, on a tray. Never under running water, never on the bench.",
     shelfLife: "9 months frozen",
     provenance: {
-      farm: "Nandini Farms, Kodagu",
+      farm: "Maple Ridge · EST 243",
       breed: "Large White",
-      feed: "Maize, soy meal and spent grain, no meat meal",
-      origin: "Karnataka, India",
+      feed: "Barley, peas and canola meal, no meat meal",
+      origin: "British Columbia, Canada",
+      grade: "Canada 2",
     },
     cutGuide: {
       whatItIs:
@@ -150,10 +153,11 @@ const products = [
     thawing: "",
     shelfLife: "21 days chilled, unopened",
     provenance: {
-      farm: "Nandini Farms, Kodagu",
+      farm: "Maple Ridge · EST 243",
       breed: "Berkshire",
-      feed: "Maize, soy meal and spent grain, no meat meal",
-      origin: "Cured and smoked in Bengaluru",
+      feed: "Barley, peas and canola meal, no meat meal",
+      origin: "Belly from EST 243, dry-cured and smoked in Bengaluru",
+      grade: "Canada 2",
     },
     cutGuide: {
       whatItIs:
@@ -194,10 +198,11 @@ const products = [
     thawing: "",
     shelfLife: "12 days chilled",
     provenance: {
-      farm: "Nandini Farms, Kodagu",
+      farm: "Maple Ridge · EST 243",
       breed: "Large White",
-      feed: "Maize, soy meal and spent grain, no meat meal",
-      origin: "Made in Bengaluru",
+      feed: "Barley, peas and canola meal, no meat meal",
+      origin: "Made in Bengaluru from EST 243 trim",
+      grade: "Canada 2",
     },
     cutGuide: {
       whatItIs:
@@ -237,10 +242,11 @@ const products = [
     thawing: "24 hours in the chiller at 2–4 °C. Cook within 48 hours of thawing.",
     shelfLife: "6 months frozen",
     provenance: {
-      farm: "Nandini Farms, Kodagu",
+      farm: "Maple Ridge · EST 243",
       breed: "Large White",
-      feed: "Maize, soy meal and spent grain, no meat meal",
+      feed: "Barley, peas and canola meal, no meat meal",
       origin: "Made in Bengaluru, pimentón from Extremadura",
+      grade: "Canada 2",
     },
     cutGuide: {
       whatItIs:
@@ -283,10 +289,11 @@ const products = [
     thawing: "",
     shelfLife: "90 days whole, 5 days sliced",
     provenance: {
-      farm: "Nandini Farms, Kodagu",
+      farm: "Red Deer · EST 306",
       breed: "Berkshire",
-      feed: "Maize, soy meal and spent grain, no meat meal",
-      origin: "Cured in Bengaluru, 90-day dry room",
+      feed: "Barley, peas and canola meal, no meat meal",
+      origin: "Neck from EST 306, cured in Bengaluru · 90-day dry room",
+      grade: "Canada 2",
     },
     cutGuide: {
       whatItIs:
@@ -327,10 +334,11 @@ const products = [
     thawing: "",
     shelfLife: "60 days whole, 10 days cut",
     provenance: {
-      farm: "Nandini Farms, Kodagu",
+      farm: "Red Deer · EST 306",
       breed: "Berkshire",
-      feed: "Maize, soy meal and spent grain, no meat meal",
-      origin: "Cured in Bengaluru",
+      feed: "Barley, peas and canola meal, no meat meal",
+      origin: "Belly from EST 306, cured in Bengaluru",
+      grade: "Canada 3 · bought whole, for the fat",
     },
     cutGuide: {
       whatItIs:
@@ -372,10 +380,11 @@ const products = [
     thawing: "",
     shelfLife: "45 days sealed, 4 days opened",
     provenance: {
-      farm: "Nandini Farms, Kodagu",
+      farm: "Red Deer · EST 306",
       breed: "Large White",
-      feed: "Maize, soy meal and spent grain, no meat meal",
+      feed: "Barley, peas and canola meal, no meat meal",
       origin: "Made in Bengaluru, pistachio from Sicily",
+      grade: "Canada 2",
     },
     cutGuide: {
       whatItIs:
@@ -411,7 +420,7 @@ const products = [
     category: "steak",
     image: "🔥",
     description:
-      "Whole rump caps, 1.2 kg average, fat cap trimmed to 10 mm. Grain-fed, imported.",
+      "Whole rump caps, 1.2 kg average, fat cap trimmed to 10 mm. Alberta grain-finished.",
     chain: "frozen",
     storageTemp: "-18 °C or below",
     onArrival:
@@ -420,10 +429,10 @@ const products = [
       "36 to 48 hours in the chiller at 2–4 °C, in the vacuum bag. Open, pat dry, rest 1 hour before cooking.",
     shelfLife: "12 months frozen",
     provenance: {
-      origin: "Rio Grande do Sul, Brazil",
-      breed: "Nelore",
-      grade: "Grain-finished 100 days",
-      feed: "Pasture then grain finish",
+      breed: "Angus cross",
+      feed: "Grass then grain-finished 120 days",
+      origin: "Alberta, Canada",
+      grade: "Canada AAA",
     },
     cutGuide: {
       whatItIs:
@@ -451,14 +460,14 @@ const products = [
     },
   },
   {
-    name: "Ribeye, Grain-Fed MB 2+",
+    name: "Ribeye, Canada AAA",
     sku: "SOP-STK-402",
     primal: "",
     methods: ["Grill", "Fry"],
     category: "steak",
     image: "🥩",
     description:
-      "Portion-cut ribeye at a fixed 30 mm, 300 g, marble score 2 or better.",
+      "Portion-cut ribeye at a fixed 30 mm, 300 g, Canada AAA marbling.",
     chain: "frozen",
     storageTemp: "-18 °C or below",
     onArrival: "Freezer immediately. Count portions against the spec sheet on arrival.",
@@ -466,10 +475,10 @@ const products = [
       "24 hours in the chiller at 2–4 °C on a rack. Pat dry and temper 45 minutes before service.",
     shelfLife: "12 months frozen",
     provenance: {
-      origin: "Queensland, Australia",
-      breed: "Angus cross",
-      grade: "MSA graded, marble score 2+",
+      breed: "Angus",
       feed: "Grain-finished 150 days",
+      origin: "Alberta, Canada",
+      grade: "Canada AAA",
     },
     cutGuide: {
       whatItIs:
@@ -509,10 +518,10 @@ const products = [
     thawing: "18 to 24 hours in the chiller at 2–4 °C. Do not thaw at room temperature.",
     shelfLife: "12 months frozen",
     provenance: {
-      origin: "Queensland, Australia",
-      breed: "Angus cross",
-      grade: "MSA graded",
+      breed: "Angus",
       feed: "Grain-finished 150 days",
+      origin: "Alberta, Canada",
+      grade: "Canada AAA",
     },
     cutGuide: {
       whatItIs:
@@ -557,9 +566,9 @@ const products = [
       "Overnight in the chiller at 2–4 °C on a perforated tray so it drains. Use within 24 hours of thawing. Never refreeze.",
     shelfLife: "9 months frozen",
     provenance: {
-      origin: "Norway",
+      origin: "New Brunswick, Canada",
       catchMethod: "Farmed, ASC certified",
-      landingRegion: "Hardangerfjord",
+      landingRegion: "Bay of Fundy",
       grade: "Superior, Trim D",
     },
     cutGuide: {
@@ -587,14 +596,14 @@ const products = [
     },
   },
   {
-    name: "Tiger Prawns 16/20, PDTO",
+    name: "Spot Prawns U-12, Shell-On",
     sku: "SOP-SEA-502",
     primal: "",
     methods: ["Fry", "Grill"],
     category: "seafood",
     image: "🦐",
     description:
-      "Peeled, deveined, tail-on. 16 to 20 pieces per pound, IQF with a 10% glaze.",
+      "Trap-caught spot prawns, head off, shell on. Twelve or fewer to the pound, IQF with a 10% glaze.",
     chain: "frozen",
     storageTemp: "-18 °C or below",
     onArrival: "Freezer immediately. Clumped blocks mean a thaw-refreeze — reject them.",
@@ -602,15 +611,15 @@ const products = [
       "In the chiller for 8 hours, or under cold running water in a sealed bag for 20 minutes. Never in warm water.",
     shelfLife: "18 months frozen",
     provenance: {
-      origin: "Andhra Pradesh, India",
-      catchMethod: "Farmed, BAP 3-star",
-      landingRegion: "Kakinada",
-      grade: "16/20 count, PDTO",
+      origin: "British Columbia, Canada",
+      catchMethod: "Wild, trap-caught",
+      landingRegion: "Strait of Georgia",
+      grade: "U-12 count, shell-on",
     },
     cutGuide: {
       whatItIs:
-        "Count size 16/20 means 16 to 20 prawns per pound — the lower the count, the bigger the prawn.",
-      whereOnAnimal: "Whole tail meat, shell off, vein removed, tail fan left on.",
+        "Count size U-12 means fewer than twelve prawns to the pound — the lower the count, the bigger the prawn.",
+      whereOnAnimal: "Whole tail, shell on, vein removed.",
       cookMethod: "Very hot, very fast. They are done the moment they turn opaque.",
       cookTemp: "High heat, 200 °C+ surface",
       cookTime: "90 seconds per side",
@@ -640,7 +649,7 @@ const products = [
     category: "poultry",
     image: "🦃",
     description:
-      "Free-range bronze turkey, 5 to 6 kg, giblets in. Pre-order only — Christmas allocation.",
+      "Free-range Ontario bronze turkey, 5 to 6 kg, giblets in. Pre-order only — Christmas allocation.",
     chain: "frozen",
     storageTemp: "-18 °C or below",
     onArrival: "Freezer immediately. Plan freezer space before the drop — these are bulky.",
@@ -648,10 +657,10 @@ const products = [
       "3 full days in the chiller at 2–4 °C for a 6 kg bird, on a tray, breast up. Roughly 10 hours per kg. Start on the 22nd for the 25th.",
     shelfLife: "12 months frozen",
     provenance: {
-      farm: "Highfield Poultry, Nilgiris",
+      farm: "Hockley Valley, Ontario",
       breed: "Bronze",
-      feed: "Free-range, maize and greens",
-      origin: "Tamil Nadu, India",
+      feed: "Free-range, wheat and greens",
+      origin: "Ontario, Canada",
     },
     cutGuide: {
       whatItIs:
@@ -691,17 +700,17 @@ const products = [
     category: "poultry",
     image: "🦆",
     description:
-      "Single lobes, 350 g, thick fat cap scored. Spikes around Christmas — pre-order from October.",
+      "Lac Brome single lobes, 350 g, thick fat cap scored. Spikes around Christmas — pre-order from October.",
     chain: "frozen",
     storageTemp: "-18 °C or below",
     onArrival: "Freezer immediately.",
     thawing: "24 hours in the chiller at 2–4 °C. Dry the skin uncovered for 2 hours before cooking.",
     shelfLife: "12 months frozen",
     provenance: {
-      farm: "Highfield Poultry, Nilgiris",
+      farm: "Lac Brome, Quebec",
       breed: "Pekin",
-      feed: "Maize and greens",
-      origin: "Tamil Nadu, India",
+      feed: "Wheat and greens",
+      origin: "Quebec, Canada",
     },
     cutGuide: {
       whatItIs:

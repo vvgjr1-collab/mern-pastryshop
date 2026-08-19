@@ -14,7 +14,7 @@ const lots = {
     stampBot: "QA sign-off · R. Menon",
     meta: [
       ["Product", "Pork belly, skin-on"],
-      ["Packer", "Nandini Farms cutting floor"],
+      ["Packer", "EST 243 · Maple Ridge"],
       ["Kill date", "09 Aug 2026"],
       ["Cases", "18 × 12 kg"],
     ],
@@ -28,7 +28,7 @@ const lots = {
         rows: [
           ["Probe", "P-114 · cal. 02 Jul 26"],
           ["Logged", "09 Aug 06:10 IST"],
-          ["Operator", "Kodagu QA"],
+          ["Operator", "Maple Ridge QA"],
           ["Document", "Kill & dress certificate"],
         ],
         body: "Carcass split, chilled, then blast frozen. Two probes per pallet, deepest position recorded.",
@@ -121,7 +121,7 @@ const lots = {
     stampBot: "Destroyed 12 Aug · buyer credited",
     meta: [
       ["Product", "Pork loin, boneless"],
-      ["Packer", "Nandini Farms cutting floor"],
+      ["Packer", "EST 118 · Fraser Valley"],
       ["Kill date", "04 Aug 2026"],
       ["Cases", "22 × 10 kg · none shipped"],
     ],
@@ -135,7 +135,7 @@ const lots = {
         rows: [
           ["Probe", "P-208 · cal. 21 May 26"],
           ["Logged", "04 Aug 05:48 IST"],
-          ["Operator", "Kodagu QA"],
+          ["Operator", "Fraser Valley QA"],
           ["Document", "Kill & dress certificate"],
         ],
         body: "Nothing wrong at origin. The lot entered the chain correctly graded and correctly frozen.",

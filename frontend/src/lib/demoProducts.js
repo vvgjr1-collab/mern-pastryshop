@@ -11,9 +11,10 @@ const demoProducts = [
       "Whole-slab belly from Berkshire pigs, skin on, ribs off. Built for crackling.",
     chain: "chilled",
     provenance: {
-      farm: "Nandini Farms, Kodagu",
+      farm: "Maple Ridge · EST 243",
       breed: "Berkshire",
-      origin: "Karnataka, India",
+      origin: "British Columbia, Canada",
+      grade: "Canada 2",
     },
     cutGuide: {
       whatItIs:
@@ -45,9 +46,10 @@ const demoProducts = [
       "Whole pork neck, salt-cured with black pepper and fennel, air-dried 90 days.",
     chain: "ambient-cured",
     provenance: {
-      farm: "Nandini Farms, Kodagu",
+      farm: "Red Deer · EST 306",
       breed: "Berkshire",
-      origin: "Cured in Bengaluru",
+      origin: "Neck from EST 306, cured in Bengaluru",
+      grade: "Canada 2",
     },
     cutGuide: {
       whatItIs:
@@ -72,7 +74,7 @@ const demoProducts = [
     _id: "demo-salmon",
     primal: "",
     methods: ["Fry", "Roast"],
-    name: "Norwegian Salmon Fillet, Skin-On",
+    name: "Atlantic Salmon Fillet, Skin-On",
     sku: "SOP-FSH-401",
     category: "seafood",
     image: "🐟",
@@ -80,9 +82,10 @@ const demoProducts = [
       "Trimmed center-cut fillet with skin on. Chilled, portioned, and ready for service.",
     chain: "chilled",
     provenance: {
-      catchMethod: "Farmed",
-      landingRegion: "Norway",
-      grade: "ASC",
+      origin: "New Brunswick, Canada",
+      catchMethod: "Farmed, ASC certified",
+      landingRegion: "Bay of Fundy",
+      grade: "Superior, Trim D",
     },
     cutGuide: {
       whatItIs:
@@ -107,7 +110,7 @@ const demoProducts = [
     _id: "demo-steak",
     primal: "",
     methods: ["Grill", "Fry"],
-    name: "MSA Striploin Steak, 22 mm",
+    name: "Striploin Steak, Canada AAA, 22 mm",
     sku: "SOP-BEF-201",
     category: "steak",
     image: "🥩",
@@ -115,8 +118,9 @@ const demoProducts = [
       "Centre-cut steak with a fixed 22 mm thickness. Quick sear, good marbling, clean spec.",
     chain: "frozen",
     provenance: {
-      origin: "Australia",
-      grade: "MSA",
+      origin: "Alberta, Canada",
+      breed: "Angus",
+      grade: "Canada AAA",
     },
     cutGuide: {
       whatItIs:
@@ -154,8 +158,10 @@ const demoProducts = [
       "Coarse 8 mm grind, natural casing, 80:20 lean to fat. No fillers, no phosphates.",
     chain: "chilled",
     provenance: {
-      farm: "Nandini Farms, Kodagu",
-      origin: "Made in Bengaluru",
+      farm: "Maple Ridge · EST 243",
+      breed: "Large White",
+      origin: "Made in Bengaluru from EST 243 trim",
+      grade: "Canada 2",
     },
     cutGuide: {
       whatItIs:
@@ -187,8 +193,9 @@ const demoProducts = [
       "Seasonal centerpiece with a confirmed pre-order allocation and detailed thawing instructions.",
     chain: "frozen",
     provenance: {
-      farm: "Highfield Farm, Nilgiris",
-      origin: "India",
+      farm: "Hockley Valley, Ontario",
+      breed: "Bronze",
+      origin: "Ontario, Canada",
     },
     cutGuide: {
       whatItIs:

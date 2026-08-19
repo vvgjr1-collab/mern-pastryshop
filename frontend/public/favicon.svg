@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Slice of Pink: a belly cross-section — banded fat and meat on charcoal.
+       Square, flat, no rounds, straight off the 1d foundations. -->
+  <rect width="32" height="32" fill="#221E1C"/>
+  <rect x="5" y="6"  width="22" height="4" fill="#F7D9D3"/>
+  <rect x="5" y="11" width="22" height="6" fill="#EFB2A8"/>
+  <rect x="5" y="18" width="22" height="3" fill="#F7D9D3"/>
+  <rect x="5" y="22" width="22" height="4" fill="#B2726C"/>
+</svg>
