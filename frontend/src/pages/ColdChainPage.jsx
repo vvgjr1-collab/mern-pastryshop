@@ -561,7 +561,10 @@ const ColdChainPage = () => {
               ))}
             </div>
 
-            <div className="flex h-[190px] flex-1 gap-[3px] border-b border-l border-sop-ink-70 pl-[3px] lg:h-[280px] lg:gap-[5px] lg:pl-[5px]">
+            {/* plot and leg labels share one column, so the labels line up with
+                the readings whatever width the axis takes */}
+            <div className="flex-1">
+              <div className="flex h-[190px] gap-[3px] border-b border-l border-sop-ink-70 pl-[3px] lg:h-[280px] lg:gap-[5px] lg:pl-[5px]">
               {readings.map((r, i) => (
                 <div key={i} className="relative h-full flex-1">
                   <div
@@ -586,10 +589,9 @@ const ColdChainPage = () => {
                   />
                 </div>
               ))}
-            </div>
-          </div>
+              </div>
 
-          <div className="ml-11 mt-2.5 flex gap-[3px] lg:ml-[52px] lg:gap-[5px]">
+              <div className="mt-2.5 flex gap-[3px] pl-[3px] lg:gap-[5px] lg:pl-[5px]">
             {lot.legs.map((g) => (
               <span
                 key={g.name}
@@ -599,6 +601,8 @@ const ColdChainPage = () => {
                 {g.name}
               </span>
             ))}
+              </div>
+            </div>
           </div>
 
           <p className="mb-5 mt-5 max-w-[36ch] text-[13.5px] leading-[1.6] text-sop-ash lg:mb-6 lg:mt-6 lg:max-w-[44ch] lg:text-[14.5px]">

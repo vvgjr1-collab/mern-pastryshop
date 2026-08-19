@@ -197,7 +197,11 @@ const CataloguePage = () => {
 
         <div>
           {/* --------------------- the filter bar ---------------------- */}
-          <div className="sticky top-0 z-40 border-b border-sop-ink bg-sop-bone-100">
+          {/* sticks below the header, not behind it */}
+          <div
+            style={{ top: "var(--sop-nav-h, 0px)" }}
+            className="sticky z-40 border-b border-sop-ink bg-sop-bone-100"
+          >
             <div className="flex gap-2 overflow-x-auto px-4 pb-2.5 pt-3 lg:px-8 lg:pt-4">
               {CATEGORIES.map((c) => (
                 <button

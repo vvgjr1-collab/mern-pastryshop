@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { cartCount } from "../lib/cart";
 import { getTrack, setTrack, hasWholesaleAccess } from "../lib/account";
@@ -19,6 +19,27 @@ const Navbar = ({ inverted = false, active = "" }) => {
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const headerRef = useRef(null);
+
+  // Publish the header's real height so sub-headers can stick underneath it
+  // instead of behind it. It is 114px on desktop and ~130px on mobile (the tab
+  // strip), and the utility bar rewraps, so a hardcoded offset is always wrong
+  // somewhere.
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+
+    const publish = () =>
+      document.documentElement.style.setProperty(
+        "--sop-nav-h",
+        `${Math.round(el.getBoundingClientRect().height)}px`
+      );
+
+    publish();
+    const observer = new ResizeObserver(publish);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const sync = () => {
@@ -47,7 +68,7 @@ const Navbar = ({ inverted = false, active = "" }) => {
     : "text-sop-ink-70 hover:text-sop-ink";
 
   return (
-    <header className="sticky top-0 z-50">
+    <header ref={headerRef} className="sticky top-0 z-50">
       {/* utility bar */}
       <div
         className={`flex items-center justify-between gap-4 px-4 py-2 lg:px-8 lg:py-[9px] ${

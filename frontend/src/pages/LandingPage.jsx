@@ -104,8 +104,16 @@ const LandingPage = () => {
               Continental protein house · est. 2019
             </span>
             <h1 className="relative -mt-[92px] mb-0 font-display text-[52px] leading-[.92] tracking-[-.02em] text-sop-ink lg:mt-0 lg:mb-6 lg:text-[104px] lg:leading-[.88] lg:tracking-[-.025em]">
+              {/* The comp forces its line breaks, and the overlap below depends
+                  on them: three lines on mobile, two on desktop. Left to wrap on
+                  its own the headline collapses to one line above ~500px and the
+                  -92px pull drags it onto the photograph. */}
               <span className="box-decoration-clone inline bg-sop-bone-100 px-2 py-0.5 lg:px-0">
-                Pink is a promise we keep <span className="italic">cold</span>
+                Pink is{" "}
+                <br className="lg:hidden" />
+                a promise
+                <br />
+                we keep <span className="italic">cold</span>
               </span>
             </h1>
             <p className="mt-5 max-w-[32ch] text-[15px] leading-[1.55] text-sop-ink-70 lg:mt-0 lg:max-w-[46ch] lg:text-[17px]">
