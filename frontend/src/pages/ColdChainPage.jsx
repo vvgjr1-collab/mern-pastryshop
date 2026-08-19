@@ -668,7 +668,8 @@ const ColdChainPage = () => {
           </h2>
           <div className="grid gap-px bg-sop-blush-edge lg:grid-cols-3">
             {protocol.map((p) => (
-              <div key={p.n} className="bg-sop-blush py-3.5 lg:pr-4">
+              // three across on one row: pad off the dividers, first stays flush
+              <div key={p.n} className="bg-sop-blush py-3.5 lg:px-5 lg:first:pl-0">
                 <div className="mb-2.5 flex items-baseline gap-2.5">
                   <span className="font-plex text-[11px] leading-none text-sop-rust lg:text-xs">
                     {p.n}

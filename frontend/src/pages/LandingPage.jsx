@@ -103,18 +103,21 @@ const LandingPage = () => {
             <span className="sop-eyebrow mb-6 hidden text-sop-cured lg:block">
               Continental protein house · est. 2019
             </span>
-            <h1 className="relative -mt-[92px] mb-0 font-display text-[52px] leading-[.92] tracking-[-.02em] text-sop-ink lg:mt-0 lg:mb-6 lg:text-[104px] lg:leading-[.88] lg:tracking-[-.025em]">
-              {/* The comp forces its line breaks, and the overlap below depends
-                  on them: three lines on mobile, two on desktop. Left to wrap on
-                  its own the headline collapses to one line above ~500px and the
-                  -92px pull drags it onto the photograph. */}
-              <span className="box-decoration-clone inline bg-sop-bone-100 px-2 py-0.5 lg:px-0">
-                Pink is{" "}
-                <br className="lg:hidden" />
-                a promise
-                <br />
-                we keep <span className="italic">cold</span>
-              </span>
+            {/* The comp forces its line breaks and the overlap depends on them:
+                three lines on mobile, two on desktop.
+
+                The bone knockout is one slab behind the whole headline, not a
+                per-line inline background. At leading .92 each line box is 67px
+                tall but only 47.8px apart, so per-line backgrounds painted over
+                the previous line's descenders — that is what read as overlapping
+                text. The negative left margin keeps the glyphs aligned with the
+                paragraph while the slab overhangs. */}
+            <h1 className="relative -ml-2.5 -mt-[92px] mb-0 inline-block bg-sop-bone-100 px-2.5 pb-1.5 pt-2 font-display text-[52px] leading-[.92] tracking-[-.02em] text-sop-ink lg:ml-0 lg:mb-6 lg:mt-0 lg:bg-transparent lg:p-0 lg:text-[104px] lg:leading-[.88] lg:tracking-[-.025em]">
+              Pink is{" "}
+              <br className="lg:hidden" />
+              a promise
+              <br />
+              we keep <span className="italic">cold</span>
             </h1>
             <p className="mt-5 max-w-[32ch] text-[15px] leading-[1.55] text-sop-ink-70 lg:mt-0 lg:max-w-[46ch] lg:text-[17px]">
               Premium pork, charcuterie and continental proteins — sourced to Canadian quality
@@ -182,9 +185,14 @@ const LandingPage = () => {
         <span className="sop-eyebrow mb-4 block text-sop-cured lg:mb-[26px]">
           How we run it · six principles
         </span>
-        <div className="grid gap-px border-t border-sop-ink bg-sop-bone-300 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-px border-t border-sop-ink bg-sop-bone-300 lg:grid-cols-3">
           {principles.map((p) => (
-            <div key={p.n} className="bg-sop-bone-100 py-[18px] lg:py-6 lg:pr-6">
+            // padded off its dividers; the first cell in each row stays flush
+            // with the section edge so it lines up with the heading above
+            <div
+              key={p.n}
+              className="bg-sop-bone-100 py-[18px] lg:px-6 lg:py-6 lg:[&:nth-child(3n+1)]:pl-0"
+            >
               <span className="mb-2 block font-plex text-[11px] leading-none text-sop-cured lg:mb-3.5 lg:text-xs">
                 {p.n}
               </span>

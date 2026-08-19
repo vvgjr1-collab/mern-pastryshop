@@ -234,7 +234,11 @@ const CanadaStoryPage = () => {
         <span className={`${eyebrow} mb-4 block text-sop-cured lg:mb-[26px]`}>Four reasons</span>
         <div className="grid gap-px border-t border-sop-ink bg-sop-bone-300 md:grid-cols-2 lg:grid-cols-4">
           {reasons.map((r) => (
-            <div key={r.n} className="bg-sop-bone-100 py-[18px] lg:py-6 lg:pr-5">
+            // four across on one row: pad off the dividers, first stays flush
+            <div
+              key={r.n}
+              className="bg-sop-bone-100 py-[18px] lg:px-5 lg:py-6 lg:first:pl-0"
+            >
               <span className="mb-2 block font-plex text-[11px] lg:text-xs leading-none text-sop-cured lg:mb-3.5">
                 {r.n}
               </span>
@@ -451,7 +455,11 @@ const CanadaStoryPage = () => {
           </h2>
           <div className="grid gap-px bg-sop-blush-edge sm:grid-cols-2">
             {refusals.map((r) => (
-              <div key={r.head} className="bg-sop-blush py-3.5 lg:py-4 lg:pr-5">
+              // two across, two rows: every odd cell starts a row
+              <div
+                key={r.head}
+                className="bg-sop-blush py-3.5 lg:px-5 lg:py-4 lg:odd:pl-0"
+              >
                 <span className="mb-1.5 block font-archivo font-semibold text-xs lg:text-[12.5px] leading-[1.3] tracking-[.12em] uppercase text-sop-ink lg:mb-2">
                   {r.head}
                 </span>
