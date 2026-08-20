@@ -30,10 +30,19 @@ The whole storefront runs on design direction **1d** from the handoff: Instrumen
 MONGO_URI
 PORT
 
-UPSTASH_REDIS_REST_URL
+UPSTASH_REDIS_REST_URL     # optional — without it rate limiting is skipped
 UPSTASH_REDIS_REST_TOKEN
 
 NODE_ENV=development
+TRADE_AUTO_APPROVE=false   # true opens the rate card on application, for demos
+```
+
+**Seed the database you deploy against.** The catalogue, and with it the whole
+Canadian sourcing story, lives in the seed — an unseeded deployment falls back
+to the six demo SKUs in `frontend/src/lib/demoProducts.js`:
+
+```
+MONGO_URI="<production connection string>" npm run seed --prefix backend
 ```
 
 ### Run the Backend

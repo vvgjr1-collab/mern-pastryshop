@@ -58,8 +58,14 @@ export async function applyForAccount(req, res) {
       city,
       // In a real deployment trade applications are verified by a human before
       // the rate card opens up. Outside production we approve on the spot so
-      // the wholesale door is walkable.
-      status: process.env.NODE_ENV === "production" ? "pending" : "approved",
+      // the wholesale door is walkable — and TRADE_AUTO_APPROVE=true does the
+      // same on a deployed demo, where "pending" otherwise leaves the whole
+      // trade half of the site unreachable. Never set it on the real shop.
+      status:
+        process.env.TRADE_AUTO_APPROVE === "true" ||
+        process.env.NODE_ENV !== "production"
+          ? "approved"
+          : "pending",
     });
 
     const savedAccount = await account.save();

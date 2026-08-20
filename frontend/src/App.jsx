@@ -11,12 +11,16 @@ import WholesalePage from "./pages/WholesalePage";
 import CanadaStoryPage from "./pages/CanadaStoryPage";
 import ColdChainPage from "./pages/ColdChainPage";
 import CutGuidePage from "./pages/CutGuidePage";
+import NotFoundPage from "./pages/NotFoundPage";
 import StickyBar from "./components/StickyBar";
+import ScrollToTop from "./components/ScrollToTop";
 //import toast from "react-hot-toast";
 
 const App = () => {
   return (
     <div className="relative min-h-screen w-full bg-sop-bone-300">
+      <ScrollToTop />
+
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/catalogue" element={<CataloguePage />} />
@@ -29,6 +33,7 @@ const App = () => {
         <Route path="/canada-story" element={<CanadaStoryPage />} />
         <Route path="/cold-chain" element={<ColdChainPage />} />
         <Route path="/cut-guide" element={<CutGuidePage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
       <StickyBar />

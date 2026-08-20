@@ -151,7 +151,9 @@ const CutGuidePage = () => {
       try {
         const res = await api.get("/products");
         setTrack(res.data.track);
-        setProducts(res.data.products);
+        // an unseeded catalogue would leave every primal reading "we aren't
+        // carrying this" — teach the cuts off the demo SKUs instead
+        setProducts(res.data.products.length ? res.data.products : demoProducts);
       } catch (error) {
         console.log("Error loading the cut guide catalogue", error);
         // the guide still teaches the cuts with no API behind it

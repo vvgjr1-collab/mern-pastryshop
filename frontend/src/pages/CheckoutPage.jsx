@@ -19,6 +19,12 @@ const CheckoutPage = () => {
   // A wholesale basket priced in cases must not be submitted from the consumer
   // door — the server would re-price it as retail packs.
   const trackMismatch = isWholesale && !hasWholesaleAccess();
+  // Demo lines have no row in the catalogue, so the server rejects the order
+  // with "product no longer available". Say so up front rather than failing at
+  // the last click.
+  const hasDemoLines = cart.lines.some((line) =>
+    String(line.productId).startsWith("demo-")
+  );
 
   const [form, setForm] = useState({
     name: "",
@@ -75,6 +81,10 @@ const CheckoutPage = () => {
     }
     if (trackMismatch) {
       toast.error("Sign back in to your trade account to place a case order");
+      return;
+    }
+    if (hasDemoLines) {
+      toast.error("Demo lines can't be ordered — these SKUs aren't in the catalogue yet");
       return;
     }
     if (!form.name.trim() || !form.phone.trim() || !form.address.trim()) {
@@ -146,6 +156,18 @@ const CheckoutPage = () => {
           <span className="mb-6 mt-1 block font-plex text-[11.5px] leading-[1.5] text-sop-ink-50 lg:text-xs">
             Chilled lines are cut the morning of the slot. Frozen lines travel gel-packed.
           </span>
+
+          {hasDemoLines && (
+            <div className="mb-5 border-l-2 border-sop-rust bg-sop-blush p-4">
+              <span className="mb-1.5 block font-archivo font-semibold text-[10px] leading-none tracking-[.14em] uppercase text-sop-rust">
+                Demo basket
+              </span>
+              <span className="block font-plex text-[11.5px] leading-[1.6] text-sop-ink-70">
+                These are sample SKUs from the demo counter, so there is nothing to pick, weigh or
+                invoice against. Orders open once the live catalogue is loaded.
+              </span>
+            </div>
+          )}
 
           {trackMismatch && (
             <div className="mb-5 border-l-2 border-sop-rust bg-sop-blush p-4 font-plex text-[11.5px] leading-[1.6] text-sop-ink-70">
@@ -308,7 +330,7 @@ const CheckoutPage = () => {
 
             <button
               type="submit"
-              disabled={loading || trackMismatch}
+              disabled={loading || trackMismatch || hasDemoLines}
               className="sop-btn-ember mt-4 w-full lg:hidden"
             >
               {loading ? "Placing order…" : `Place order · ${formatINR(subtotal + deliveryFee)}`}
@@ -362,7 +384,7 @@ const CheckoutPage = () => {
 
           <button
             type="button"
-            disabled={loading || trackMismatch}
+            disabled={loading || trackMismatch || hasDemoLines}
             onClick={handleSubmit}
             className="sop-btn-ember hidden w-full lg:inline-flex lg:min-h-[56px] lg:text-[12.5px]"
           >

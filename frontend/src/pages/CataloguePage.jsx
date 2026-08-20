@@ -55,10 +55,18 @@ const CataloguePage = () => {
           params: { category, chain, search, seasonal: seasonal || undefined },
         });
         // the API tells us which door it answered — never assume
-        setTrack(res.data.track);
-        setProducts(res.data.products);
         setIsRateLimited(false);
-        setIsDemoCatalogue(false);
+        if (res.data.products.length === 0) {
+          // The catalogue answered but has nothing in it — an unseeded
+          // database rather than a search with no matches. Show the demo
+          // counter instead of a dead page. A genuine no-match search still
+          // ends up empty, because the demo list gets the same filters.
+          showDemoCatalogue();
+        } else {
+          setTrack(res.data.track);
+          setProducts(res.data.products);
+          setIsDemoCatalogue(false);
+        }
       } catch (error) {
         console.log("Error fetching products");
         console.log(error);

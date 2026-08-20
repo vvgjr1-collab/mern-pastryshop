@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Hatch from "../components/Hatch";
 import NonVegMark from "../components/NonVegMark";
 import api from "../lib/axios";
+import demoProducts from "../lib/demoProducts";
 import { formatINR } from "../lib/utils";
 import { CATEGORIES, CHAINS, SEASONAL_CALENDAR } from "../lib/trade";
 
@@ -69,11 +70,14 @@ const LandingPage = () => {
     const fetchBestsellers = async () => {
       try {
         const res = await api.get("/products");
-        setBestsellers(res.data.products.slice(0, 5));
+        // without this the whole rail vanishes when the catalogue is unseeded,
+        // leaving a hole in the middle of the homepage
+        setBestsellers((res.data.products.length ? res.data.products : demoProducts).slice(0, 5));
       } catch (error) {
         // the rail is decoration on this page — a failure here must not take
         // the homepage down with it
         console.log("Could not load the bestseller rail", error);
+        setBestsellers(demoProducts.slice(0, 5));
       }
     };
 
