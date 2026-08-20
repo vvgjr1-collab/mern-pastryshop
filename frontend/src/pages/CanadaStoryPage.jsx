@@ -108,8 +108,8 @@ const route = [
   { place: "Plant · EST 118", note: "graded, cut to our spec, blast frozen", day: "day 0 – 1" },
   { place: "Cold store · Vancouver", note: "held at −18 °C, probed twice daily", day: "day 3" },
   { place: "Reefer · sea leg", note: "set point −18 °C, GPS and door alarms", day: "day 3 – 21" },
-  { place: "Port · Chennai", note: "customs, FSSAI sampling, seal intact", day: "day 24" },
-  { place: "Our facility · Bengaluru", note: "receipt probe, then tempered to order", day: "day 26" },
+  { place: "Port · Nhava Sheva", note: "customs, FSSAI sampling, seal intact", day: "day 24" },
+  { place: "Our facility · Taloja", note: "receipt probe, then tempered to order", day: "day 26" },
 ];
 
 const plants = [
@@ -204,8 +204,8 @@ const CanadaStoryPage = () => {
             </h1>
             <p className="mb-4 max-w-[34ch] text-[14.5px] leading-[1.6] text-sop-ink-70 lg:max-w-[44ch] lg:text-[17px] lg:leading-[1.55]">
               Every pork exporter tells you their pigs are happy. What we needed was a country
-              where the claims are measured, numbered and published — so a small importer in
-              Bengaluru can check them from six thousand miles away.
+              where the claims are measured, numbered and published — so a small importer outside
+              Mumbai can check them from six thousand miles away.
             </p>
             <p className="max-w-[34ch] text-[14.5px] leading-[1.6] text-sop-ink-70 lg:max-w-[44ch] lg:text-[17px] lg:leading-[1.55]">
               Canada grades every carcass on an index, gives every plant an establishment number,
@@ -256,7 +256,7 @@ const CanadaStoryPage = () => {
         </div>
       </section>
 
-      {/* ------------------- grading + barn to Bengaluru ---------------- */}
+      {/* ------------------- grading + barn to Taloja ---------------- */}
       <section className="grid lg:grid-cols-[.92fr_1.08fr]">
         {/* grading — the live classes */}
         <div className="border-b border-sop-bone-300 bg-sop-bone-200 px-4 pb-[30px] pt-7 lg:border-b-0 lg:border-r lg:px-11 lg:pb-[60px] lg:pt-14">
@@ -337,9 +337,9 @@ const CanadaStoryPage = () => {
           </div>
         </div>
 
-        {/* barn to Bengaluru */}
+        {/* barn to Taloja */}
         <div className="bg-sop-ink px-4 pb-[30px] pt-7 lg:px-11 lg:pb-[60px] lg:pt-14">
-          <span className={`${eyebrow} mb-3 block text-sop-chill lg:mb-4`}>Barn to Bengaluru</span>
+          <span className={`${eyebrow} mb-3 block text-sop-chill lg:mb-4`}>Barn to Taloja</span>
           <h2 className="mb-2 font-display text-[30px] leading-none text-sop-bone-100 lg:mb-3.5 lg:text-[52px] lg:leading-[.98]">
             Twenty-six days,
             <br />

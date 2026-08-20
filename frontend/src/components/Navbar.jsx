@@ -8,6 +8,7 @@ const learnNav = [
   { label: "Cut guide", to: "/cut-guide" },
   { label: "Cold chain", to: "/cold-chain" },
   { label: "Canada story", to: "/canada-story" },
+  { label: "About", to: "/about" },
   { label: "Wholesale", to: "/wholesale" },
 ];
 
@@ -76,9 +77,9 @@ const Navbar = ({ inverted = false, active = "" }) => {
         }`}
       >
         <span className="font-plex text-[11px] lg:text-[11.5px] leading-none tracking-[.06em] text-sop-loin">
-          <span className="lg:hidden">Bengaluru · next-day chilled</span>
+          <span className="lg:hidden">Mumbai · next-day chilled</span>
           <span className="hidden lg:inline">
-            Bengaluru · Mumbai · next-day chilled · order by 6 am for same-day trade dispatch
+            Mumbai · Bengaluru · next-day chilled · order by 6 am for same-day trade dispatch
           </span>
         </span>
         <span className="whitespace-nowrap font-plex font-medium text-[11px] lg:text-[11.5px] leading-none tracking-[.06em] text-sop-bone-100">

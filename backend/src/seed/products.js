@@ -156,7 +156,7 @@ const products = [
       farm: "Maple Ridge · EST 243",
       breed: "Berkshire",
       feed: "Barley, peas and canola meal, no meat meal",
-      origin: "Belly from EST 243, dry-cured and smoked in Bengaluru",
+      origin: "Belly from EST 243, dry-cured and smoked in Taloja",
       grade: "Canada 2",
     },
     cutGuide: {
@@ -201,7 +201,7 @@ const products = [
       farm: "Maple Ridge · EST 243",
       breed: "Large White",
       feed: "Barley, peas and canola meal, no meat meal",
-      origin: "Made in Bengaluru from EST 243 trim",
+      origin: "Made in Taloja from EST 243 trim",
       grade: "Canada 2",
     },
     cutGuide: {
@@ -245,7 +245,7 @@ const products = [
       farm: "Maple Ridge · EST 243",
       breed: "Large White",
       feed: "Barley, peas and canola meal, no meat meal",
-      origin: "Made in Bengaluru, pimentón from Extremadura",
+      origin: "Made in Taloja, pimentón from Extremadura",
       grade: "Canada 2",
     },
     cutGuide: {
@@ -292,7 +292,7 @@ const products = [
       farm: "Red Deer · EST 306",
       breed: "Berkshire",
       feed: "Barley, peas and canola meal, no meat meal",
-      origin: "Neck from EST 306, cured in Bengaluru · 90-day dry room",
+      origin: "Neck from EST 306, cured in Taloja · 90-day dry room",
       grade: "Canada 2",
     },
     cutGuide: {
@@ -337,7 +337,7 @@ const products = [
       farm: "Red Deer · EST 306",
       breed: "Berkshire",
       feed: "Barley, peas and canola meal, no meat meal",
-      origin: "Belly from EST 306, cured in Bengaluru",
+      origin: "Belly from EST 306, cured in Taloja",
       grade: "Canada 3 · bought whole, for the fat",
     },
     cutGuide: {
@@ -383,7 +383,7 @@ const products = [
       farm: "Red Deer · EST 306",
       breed: "Large White",
       feed: "Barley, peas and canola meal, no meat meal",
-      origin: "Made in Bengaluru, pistachio from Sicily",
+      origin: "Made in Taloja, pistachio from Sicily",
       grade: "Canada 2",
     },
     cutGuide: {

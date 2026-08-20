@@ -11,6 +11,7 @@ import WholesalePage from "./pages/WholesalePage";
 import CanadaStoryPage from "./pages/CanadaStoryPage";
 import ColdChainPage from "./pages/ColdChainPage";
 import CutGuidePage from "./pages/CutGuidePage";
+import AboutPage from "./pages/AboutPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import StickyBar from "./components/StickyBar";
 import ScrollToTop from "./components/ScrollToTop";
@@ -33,6 +34,7 @@ const App = () => {
         <Route path="/canada-story" element={<CanadaStoryPage />} />
         <Route path="/cold-chain" element={<ColdChainPage />} />
         <Route path="/cut-guide" element={<CutGuidePage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
 

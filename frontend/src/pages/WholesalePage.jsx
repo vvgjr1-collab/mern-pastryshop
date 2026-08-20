@@ -34,7 +34,7 @@ const logistics = [
   { k: "Lead time, frozen", v: "48 h from confirmation" },
   { k: "Standing orders", v: "Same lines, same window, weekly" },
   { k: "Sunday", v: "No dispatch · Saturday double-drop" },
-  { k: "Cities served", v: "Bengaluru · Mumbai" },
+  { k: "Cities served", v: "Mumbai · Bengaluru" },
 ];
 
 const credit = [
@@ -173,7 +173,7 @@ const WholesalePage = () => {
           <span className="sop-eyebrow mb-4 block text-sop-loin lg:mb-5">
             {approved
               ? `Signed in · ${account.businessName} · A/c ${account.accountKey.slice(-5)}`
-              : "HORECA supply · Bengaluru & Mumbai"}
+              : "HORECA supply · Mumbai & Bengaluru"}
           </span>
           <h1 className="mb-4 font-display text-[46px] leading-[.92] tracking-[-.02em] text-sop-bone-100 lg:mb-5 lg:text-[84px] lg:leading-[.88] lg:tracking-[-.025em]">
             Supply for

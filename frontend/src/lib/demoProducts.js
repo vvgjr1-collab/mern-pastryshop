@@ -48,7 +48,7 @@ const demoProducts = [
     provenance: {
       farm: "Red Deer · EST 306",
       breed: "Berkshire",
-      origin: "Neck from EST 306, cured in Bengaluru",
+      origin: "Neck from EST 306, cured in Taloja",
       grade: "Canada 2",
     },
     cutGuide: {
@@ -160,7 +160,7 @@ const demoProducts = [
     provenance: {
       farm: "Maple Ridge · EST 243",
       breed: "Large White",
-      origin: "Made in Bengaluru from EST 243 trim",
+      origin: "Made in Taloja from EST 243 trim",
       grade: "Canada 2",
     },
     cutGuide: {

@@ -11,7 +11,7 @@ const lots = {
   "SOP-2681-A": {
     status: "clean",
     stampTop: "Released 14 Aug 05:40 IST",
-    stampBot: "QA sign-off · R. Menon",
+    stampBot: "QA sign-off · Kamal Ratreja",
     meta: [
       ["Product", "Pork belly, skin-on"],
       ["Packer", "EST 243 · Maple Ridge"],
@@ -70,7 +70,7 @@ const lots = {
         rows: [
           ["Room", "Temper 2 · 18 h"],
           ["Probe", "F-21 · cal. 04 Aug 26"],
-          ["Operator", "K. Iyer"],
+          ["Operator", "Kamal Ratreja"],
           ["Document", "Temper & pack sheet"],
         ],
         body: "Tempered from frozen to chilled over 18 hours, cut to pack spec, vacuum sealed and weight-verified.",
