@@ -324,7 +324,7 @@ const CheckoutPage = () => {
                 </span>
               </div>
               <span className="hidden whitespace-nowrap font-plex text-[11.5px] leading-none text-sop-bone-100 sm:block">
-                +91 98860 41207
+                +91 98217 00016
               </span>
             </div>
 

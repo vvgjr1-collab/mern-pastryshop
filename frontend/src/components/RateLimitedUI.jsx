@@ -8,7 +8,7 @@ const RateLimitedUI = () => {
         Too many requests to the catalogue in a short period. Wait a moment and try again.
       </p>
       <p className="mt-2 font-plex text-[11.5px] leading-[1.6] text-sop-rust">
-        Trade buyers placing a large order: the desk will take it on WhatsApp — +91 98860 41207.
+        Trade buyers placing a large order: the desk will take it on WhatsApp — +91 98217 00016.
       </p>
     </div>
   );

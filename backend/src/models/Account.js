@@ -67,8 +67,8 @@ const accountSchema = new mongoose.Schema(
     },
     // named account contact — wholesale buyers get a person, not a helpdesk
     accountManager: {
-      name: { type: String, default: "Rhea Menon" },
-      phone: { type: String, default: "+91 98860 41207" },
+      name: { type: String, default: "Mr. Kamal Ratreja" },
+      phone: { type: String, default: "+91 98217 00016" },
       email: { type: String, default: "trade@sliceofpink.in" },
     },
   },

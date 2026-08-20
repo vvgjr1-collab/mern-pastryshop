@@ -452,7 +452,7 @@ const ProductDetailPage = () => {
             ["Net quantity", packLabel],
             ["Lot code", `SP-${product.sku.split("-").pop()}-B14`],
             ["Packer", "Slice of Pink Foods Pvt Ltd, Bengaluru 560099"],
-            ["Consumer care", "hello@sliceofpink.in · +91 98860 41207"],
+            ["Consumer care", "hello@sliceofpink.in · +91 98217 00016"],
           ].map(([k, v]) => (
             <div
               key={k}

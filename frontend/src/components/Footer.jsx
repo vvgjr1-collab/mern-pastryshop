@@ -81,7 +81,7 @@ const Footer = () => {
 
       <div id="contact" className="flex flex-col gap-[7px] border-t border-sop-bone-300 pt-3.5 lg:hidden">
         <span className="font-plex text-[11px] leading-[1.6] text-sop-ink-50">
-          Cold room: Bommasandra, Bengaluru · trade@sliceofpink.in · +91 98860 41207
+          Cold room: Bommasandra, Bengaluru · trade@sliceofpink.in · +91 98217 00016
         </span>
         <span className="font-plex text-[11px] leading-[1.6] text-sop-ink-50">
           FSSAI licence 10021064000000 · GSTIN 29ABCDE1234F1Z5

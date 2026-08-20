@@ -139,7 +139,7 @@ const LandingPage = () => {
             <span className="hidden font-plex text-xs leading-[1.5] text-sop-ink-50 lg:ml-2 lg:block">
               or WhatsApp
               <br />
-              +91 98860 41207
+              +91 98217 00016
             </span>
           </div>
         </div>

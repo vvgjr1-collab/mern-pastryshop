@@ -202,7 +202,7 @@ const WholesalePage = () => {
               </a>
             )}
             <span className="sop-btn-outline-light lg:min-h-[52px] lg:px-6 lg:text-[12.5px]">
-              Trade desk · +91 98860 41207
+              Trade desk · +91 98217 00016
             </span>
           </div>
         </div>
@@ -555,7 +555,7 @@ const WholesalePage = () => {
                 Application declined
               </h2>
               <p className="mx-auto max-w-[34ch] text-[14px] leading-[1.6] text-sop-ink-70">
-                We couldn't verify the details supplied. Call the trade desk on +91 98860 41207 and
+                We couldn't verify the details supplied. Call the trade desk on +91 98217 00016 and
                 we'll sort it out.
               </p>
             </div>
