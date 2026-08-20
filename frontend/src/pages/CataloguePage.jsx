@@ -195,28 +195,35 @@ const CataloguePage = () => {
           </div>
         </aside>
 
-        <div>
+        {/* min-w-0: a grid item defaults to min-width:auto, so without this the
+            column stretches to the widest filter row and the whole page scrolls
+            sideways instead of the filter strips scrolling inside it */}
+        <div className="min-w-0">
           {/* --------------------- the filter bar ---------------------- */}
           {/* sticks below the header, not behind it */}
           <div
             style={{ top: "var(--sop-nav-h, 0px)" }}
             className="sticky z-40 border-b border-sop-ink bg-sop-bone-100"
           >
-            <div className="flex gap-2 overflow-x-auto px-4 pb-2.5 pt-3 lg:px-8 lg:pt-4">
+            {/* families — one scrolling strip on mobile */}
+            <div className="flex gap-2 overflow-x-auto px-4 pb-2.5 pt-3 lg:flex-wrap lg:px-8 lg:pt-4">
               {CATEGORIES.map((c) => (
                 <button
                   key={c.value}
                   type="button"
                   onClick={() => setParam("category", c.value)}
-                  className={c.value === category ? "sop-chip-on" : "sop-chip-off"}
+                  className={`flex-none ${
+                    c.value === category ? "sop-chip-on" : "sop-chip-off"
+                  }`}
                 >
                   {c.label}
                 </button>
               ))}
             </div>
 
-            <div className="flex flex-wrap items-center justify-between gap-2.5 px-4 pb-3 lg:px-8">
-              <div className="inline-flex border-[1.5px] border-sop-ink">
+            {/* chains — its own strip, so four long labels can't widen the page */}
+            <div className="flex overflow-x-auto px-4 pb-2.5 lg:px-8">
+              <div className="inline-flex flex-none border-[1.5px] border-sop-ink">
                 {[["all", "All"], ...Object.entries(CHAINS).map(([k, v]) => [k, v.label])].map(
                   ([value, label]) => (
                     <button
@@ -234,10 +241,13 @@ const CataloguePage = () => {
                   )
                 )}
               </div>
+            </div>
 
+            {/* search, seasonal and the count wrap freely */}
+            <div className="flex flex-wrap items-center justify-between gap-2.5 px-4 pb-3 lg:px-8">
               <input
                 type="text"
-                className="sop-input h-11 max-w-[240px] flex-1"
+                className="sop-input h-11 min-w-0 flex-1 sm:max-w-[240px]"
                 placeholder="Search a cut or a SKU"
                 value={search}
                 onChange={(e) => setParam("search", e.target.value)}
